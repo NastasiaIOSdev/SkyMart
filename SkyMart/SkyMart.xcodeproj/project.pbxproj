@@ -7,18 +7,45 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2E7E0E4F2C08899600E126DC /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7E0E4E2C08899600E126DC /* AppCoordinator.swift */; };
+		2E7E0E512C0889D400E126DC /* FlightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7E0E502C0889D400E126DC /* FlightView.swift */; };
+		2E7E0E532C0889FD00E126DC /* SearchCountryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7E0E522C0889FD00E126DC /* SearchCountryView.swift */; };
+		2E7E0E552C088A1F00E126DC /* ChooseFlightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7E0E542C088A1F00E126DC /* ChooseFlightView.swift */; };
+		2E7E0E572C088A4E00E126DC /* HotelsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7E0E562C088A4E00E126DC /* HotelsView.swift */; };
+		2E7E0E592C088A7600E126DC /* InShortView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7E0E582C088A7600E126DC /* InShortView.swift */; };
+		2E7E0E5B2C088A9700E126DC /* SubscriptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7E0E5A2C088A9700E126DC /* SubscriptionsView.swift */; };
+		2E7E0E5D2C088AB700E126DC /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7E0E5C2C088AB700E126DC /* ProfileView.swift */; };
 		2EA298EA2C0884BF0069F35A /* SkyMartApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA298E92C0884BF0069F35A /* SkyMartApp.swift */; };
 		2EA298EC2C0884BF0069F35A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA298EB2C0884BF0069F35A /* ContentView.swift */; };
 		2EA298EE2C0884C10069F35A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EA298ED2C0884C10069F35A /* Assets.xcassets */; };
 		2EA298F12C0884C10069F35A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EA298F02C0884C10069F35A /* Preview Assets.xcassets */; };
+		2EA299052C0888130069F35A /* AppFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA299042C0888130069F35A /* AppFonts.swift */; };
+		2EA299072C08881D0069F35A /* SF-Pro-Display-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2EA299062C08881D0069F35A /* SF-Pro-Display-Medium.otf */; };
+		2EA299092C0888250069F35A /* SF-Pro-Display-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2EA299082C0888250069F35A /* SF-Pro-Display-Regular.otf */; };
+		2EA2990B2C08882B0069F35A /* SF-Pro-Display-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2EA2990A2C08882B0069F35A /* SF-Pro-Display-Semibold.otf */; };
+		2EA2990E2C08888D0069F35A /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA2990D2C08888D0069F35A /* AppColors.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2E7E0E4E2C08899600E126DC /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		2E7E0E502C0889D400E126DC /* FlightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightView.swift; sourceTree = "<group>"; };
+		2E7E0E522C0889FD00E126DC /* SearchCountryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCountryView.swift; sourceTree = "<group>"; };
+		2E7E0E542C088A1F00E126DC /* ChooseFlightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseFlightView.swift; sourceTree = "<group>"; };
+		2E7E0E562C088A4E00E126DC /* HotelsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotelsView.swift; sourceTree = "<group>"; };
+		2E7E0E582C088A7600E126DC /* InShortView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InShortView.swift; sourceTree = "<group>"; };
+		2E7E0E5A2C088A9700E126DC /* SubscriptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionsView.swift; sourceTree = "<group>"; };
+		2E7E0E5C2C088AB700E126DC /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		2EA298E62C0884BF0069F35A /* SkyMart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SkyMart.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EA298E92C0884BF0069F35A /* SkyMartApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkyMartApp.swift; sourceTree = "<group>"; };
 		2EA298EB2C0884BF0069F35A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		2EA298ED2C0884C10069F35A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2EA298F02C0884C10069F35A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		2EA299042C0888130069F35A /* AppFonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppFonts.swift; sourceTree = "<group>"; };
+		2EA299062C08881D0069F35A /* SF-Pro-Display-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Medium.otf"; sourceTree = "<group>"; };
+		2EA299082C0888250069F35A /* SF-Pro-Display-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Regular.otf"; sourceTree = "<group>"; };
+		2EA2990A2C08882B0069F35A /* SF-Pro-Display-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Semibold.otf"; sourceTree = "<group>"; };
+		2EA2990C2C0888410069F35A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		2EA2990D2C08888D0069F35A /* AppColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,9 +78,14 @@
 		2EA298E82C0884BF0069F35A /* SkyMart */ = {
 			isa = PBXGroup;
 			children = (
+				2EA2990C2C0888410069F35A /* Info.plist */,
 				2EA298E92C0884BF0069F35A /* SkyMartApp.swift */,
-				2EA298EB2C0884BF0069F35A /* ContentView.swift */,
-				2EA298ED2C0884C10069F35A /* Assets.xcassets */,
+				2EA298FE2C0886C10069F35A /* App */,
+				2EA298FF2C0886C90069F35A /* Models */,
+				2EA298FD2C0886BD0069F35A /* Services */,
+				2EA298FC2C0886B90069F35A /* Views */,
+				2EA298FB2C0886B50069F35A /* Extentions */,
+				2EA298FA2C0886B10069F35A /* Design */,
 				2EA298EF2C0884C10069F35A /* Preview Content */,
 			);
 			path = SkyMart;
@@ -65,6 +97,119 @@
 				2EA298F02C0884C10069F35A /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		2EA298F72C0886970069F35A /* InShort */ = {
+			isa = PBXGroup;
+			children = (
+				2E7E0E582C088A7600E126DC /* InShortView.swift */,
+			);
+			path = InShort;
+			sourceTree = "<group>";
+		};
+		2EA298F82C08869C0069F35A /* Hotets */ = {
+			isa = PBXGroup;
+			children = (
+				2E7E0E562C088A4E00E126DC /* HotelsView.swift */,
+			);
+			path = Hotets;
+			sourceTree = "<group>";
+		};
+		2EA298F92C08869F0069F35A /* Flights */ = {
+			isa = PBXGroup;
+			children = (
+				2E7E0E502C0889D400E126DC /* FlightView.swift */,
+				2E7E0E522C0889FD00E126DC /* SearchCountryView.swift */,
+				2E7E0E542C088A1F00E126DC /* ChooseFlightView.swift */,
+			);
+			path = Flights;
+			sourceTree = "<group>";
+		};
+		2EA298FA2C0886B10069F35A /* Design */ = {
+			isa = PBXGroup;
+			children = (
+				2EA299022C0887AB0069F35A /* AppFonts */,
+				2EA299032C0887B60069F35A /* AppColors */,
+				2EA298ED2C0884C10069F35A /* Assets.xcassets */,
+			);
+			path = Design;
+			sourceTree = "<group>";
+		};
+		2EA298FB2C0886B50069F35A /* Extentions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extentions;
+			sourceTree = "<group>";
+		};
+		2EA298FC2C0886B90069F35A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2EA298F92C08869F0069F35A /* Flights */,
+				2EA298F82C08869C0069F35A /* Hotets */,
+				2EA298F72C0886970069F35A /* InShort */,
+				2EA299002C08876E0069F35A /* Subscriptions */,
+				2EA299012C0887720069F35A /* Profile */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		2EA298FD2C0886BD0069F35A /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		2EA298FE2C0886C10069F35A /* App */ = {
+			isa = PBXGroup;
+			children = (
+				2E7E0E4E2C08899600E126DC /* AppCoordinator.swift */,
+				2EA298EB2C0884BF0069F35A /* ContentView.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		2EA298FF2C0886C90069F35A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		2EA299002C08876E0069F35A /* Subscriptions */ = {
+			isa = PBXGroup;
+			children = (
+				2E7E0E5A2C088A9700E126DC /* SubscriptionsView.swift */,
+			);
+			path = Subscriptions;
+			sourceTree = "<group>";
+		};
+		2EA299012C0887720069F35A /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				2E7E0E5C2C088AB700E126DC /* ProfileView.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		2EA299022C0887AB0069F35A /* AppFonts */ = {
+			isa = PBXGroup;
+			children = (
+				2EA299042C0888130069F35A /* AppFonts.swift */,
+				2EA299062C08881D0069F35A /* SF-Pro-Display-Medium.otf */,
+				2EA299082C0888250069F35A /* SF-Pro-Display-Regular.otf */,
+				2EA2990A2C08882B0069F35A /* SF-Pro-Display-Semibold.otf */,
+			);
+			path = AppFonts;
+			sourceTree = "<group>";
+		};
+		2EA299032C0887B60069F35A /* AppColors */ = {
+			isa = PBXGroup;
+			children = (
+				2EA2990D2C08888D0069F35A /* AppColors.swift */,
+			);
+			path = AppColors;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -125,7 +270,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2EA299072C08881D0069F35A /* SF-Pro-Display-Medium.otf in Resources */,
 				2EA298F12C0884C10069F35A /* Preview Assets.xcassets in Resources */,
+				2EA2990B2C08882B0069F35A /* SF-Pro-Display-Semibold.otf in Resources */,
+				2EA299092C0888250069F35A /* SF-Pro-Display-Regular.otf in Resources */,
 				2EA298EE2C0884C10069F35A /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -137,8 +285,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E7E0E592C088A7600E126DC /* InShortView.swift in Sources */,
+				2E7E0E5B2C088A9700E126DC /* SubscriptionsView.swift in Sources */,
+				2EA299052C0888130069F35A /* AppFonts.swift in Sources */,
+				2E7E0E532C0889FD00E126DC /* SearchCountryView.swift in Sources */,
+				2E7E0E5D2C088AB700E126DC /* ProfileView.swift in Sources */,
+				2EA2990E2C08888D0069F35A /* AppColors.swift in Sources */,
+				2E7E0E552C088A1F00E126DC /* ChooseFlightView.swift in Sources */,
+				2E7E0E4F2C08899600E126DC /* AppCoordinator.swift in Sources */,
 				2EA298EC2C0884BF0069F35A /* ContentView.swift in Sources */,
+				2E7E0E512C0889D400E126DC /* FlightView.swift in Sources */,
 				2EA298EA2C0884BF0069F35A /* SkyMartApp.swift in Sources */,
+				2E7E0E572C088A4E00E126DC /* HotelsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,6 +428,7 @@
 				DEVELOPMENT_TEAM = 3VJYN6Z9BM;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SkyMart/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -299,6 +458,7 @@
 				DEVELOPMENT_TEAM = 3VJYN6Z9BM;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SkyMart/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
