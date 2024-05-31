@@ -15,6 +15,7 @@ enum AppFonts {
     case semibold16
     case semibold20
     case semibold22
+    case regularItalic14
     
     var font: Font {
         switch self {
@@ -33,6 +34,8 @@ enum AppFonts {
             return .custom("SF-Pro-Display-Semibold", size: 22)
         case .semibold16:
             return .custom("SF-Pro-Display-Semibold", size: 16)
+        case .regularItalic14:
+            return .custom("SF-Pro-Display-RegularItalic", size: 14)
         }
     }
 }

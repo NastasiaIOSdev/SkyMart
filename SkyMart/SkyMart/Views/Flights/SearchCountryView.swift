@@ -68,106 +68,114 @@ struct SearchCountryView: View {
                                 .padding()
                         }
                     }
-                    .padding(.top)
-                    HStack(alignment: .top) {
-                        VStack(alignment: .center) {
-                            Button(action: {
-                                //
-                            }) {
-                                Image("searchButton1")
-                                    .frame(width: 48)
-                            }
-                            Text("Сложный маршрут")
-                                .foregroundColor(AppColors.white)
-                                .font(AppFonts.regular14.font)
-                                .multilineTextAlignment(.center)
-                        }
-                        .frame(width: 90)
-                        Spacer()
-                        VStack(alignment: .center) {
-                            Button(action: {
-                                //
-                            }) {
-                                Image("searchButton2")
-                                    .frame(width: 48)
-                            }
-                            Text("Куда угодно")
-                                .foregroundColor(AppColors.white)
-                                .font(AppFonts.regular14.font)
-                                .multilineTextAlignment(.center)
-                        }
-                        .frame(width: 90)
-                        Spacer()
-                        VStack(alignment: .center) {
-                            Button(action: {
-                                //
-                            }) {
-                                Image("searchButton3")
-                                    .frame(width: 48)
-                            }
-                            Text("Выходные")
-                                .foregroundColor(AppColors.white)
-                                .font(AppFonts.regular14.font)
-                                .multilineTextAlignment(.center)
-                        }
-                        .frame(width: 90)
-                        Spacer()
-                        VStack(alignment: .center) {
-                            Button(action: {
-                                //
-                            }) {
-                                Image("searchButton4")
-                                    .frame(width: 48)
-                            }
-                            Text("Горячие билеты")
-                                .foregroundColor(AppColors.white)
-                                .font(AppFonts.regular14.font)
-                                .multilineTextAlignment(.center)
-                        }
-                        .frame(width: 90)
-                    }
                     .padding()
-                    VStack {
-                        ZStack{
-                            RoundedRectangle(cornerRadius: 16)
-                                .foregroundColor(AppColors.grey3)
-                                .frame(height: 216)
-                            VStack(alignment: .leading, spacing: 8) {
-                                CountrySelectionRow(image: "countryImage1", country: "Стамбул", isSelected: true) {
-                                    selectedCountry = "Стамбул"
-                                    isChooseFlightViewPresented.toggle()
-                                }
-                                    .onTapGesture {
-                                        selectedCountry = "Стамбул"
-                                        isChooseFlightViewPresented.toggle()
+                    ScrollView (.vertical, showsIndicators: false) {
+                        VStack {
+                            VStack {
+                                HStack(alignment: .top) {
+                                    VStack(alignment: .center) {
+                                        Button(action: {
+                                            //
+                                        }) {
+                                            Image("searchButton1")
+                                                .frame(width: 48)
+                                        }
+                                        Text("Сложный маршрут")
+                                            .foregroundColor(AppColors.white)
+                                            .font(AppFonts.regular14.font)
+                                            .multilineTextAlignment(.center)
                                     }
-                                Divider()
-                                    .background(AppColors.grey5)
-                                    .padding(.bottom,8)
-                                CountrySelectionRow(image: "countryImage2", country: "Сочи", isSelected: true) {
-                                    selectedCountry = "Сочи"
-                                        isChooseFlightViewPresented.toggle()
-                                }
-                                    .onTapGesture {
-                                        selectedCountry = "Сочи"
-                                        isChooseFlightViewPresented.toggle()
+                                    .frame(width: 70)
+                                    Spacer()
+                                    VStack(alignment: .center) {
+                                        Button(action: {
+                                            //
+                                        }) {
+                                            Image("searchButton2")
+                                                .frame(width: 48)
+                                        }
+                                        Text("Куда угодно")
+                                            .foregroundColor(AppColors.white)
+                                            .font(AppFonts.regular14.font)
+                                            .multilineTextAlignment(.center)
                                     }
-                                Divider()
-                                    .background(AppColors.grey5)
-                                    .padding(.bottom,8)
-                                CountrySelectionRow(image: "countryImage3", country: "Пхукет", isSelected: true) {
-                                    selectedCountry = "Пхукет"
-                                        isChooseFlightViewPresented.toggle()
-                                }
-                                    .onTapGesture {
-                                        selectedCountry = "Пхукет"
-                                        isChooseFlightViewPresented.toggle()
+                                    .frame(width: 90)
+                                    Spacer()
+                                    VStack(alignment: .center) {
+                                        Button(action: {
+                                            //
+                                        }) {
+                                            Image("searchButton3")
+                                                .frame(width: 48)
+                                        }
+                                        Text("Выходные")
+                                            .foregroundColor(AppColors.white)
+                                            .font(AppFonts.regular14.font)
+                                            .multilineTextAlignment(.center)
                                     }
+                                    .frame(width: 70)
+                                    Spacer()
+                                    VStack(alignment: .center) {
+                                        Button(action: {
+                                            //
+                                        }) {
+                                            Image("searchButton4")
+                                                .frame(width: 48)
+                                        }
+                                        Text("Горячие билеты")
+                                            .foregroundColor(AppColors.white)
+                                            .font(AppFonts.regular14.font)
+                                            .multilineTextAlignment(.center)
+                                    }
+                                    .frame(width: 70)
+                                }
+                                .padding(.leading)
+                                .padding(.trailing)
+                            }
+                            VStack {
+                                ZStack{
+                                    RoundedRectangle(cornerRadius: 16)
+                                        .foregroundColor(AppColors.grey3)
+                                        .frame(height: 216)
+                                    VStack(alignment: .leading, spacing: 8) {
+                                        CountrySelectionRow(image: "countryImage1", country: "Стамбул", isSelected: true) {
+                                            selectedCountry = "Стамбул"
+                                            isChooseFlightViewPresented.toggle()
+                                        }
+                                        .onTapGesture {
+                                            selectedCountry = "Стамбул"
+                                            isChooseFlightViewPresented.toggle()
+                                        }
+                                        Divider()
+                                            .background(AppColors.grey5)
+                                            .padding(.bottom,8)
+                                        CountrySelectionRow(image: "countryImage2", country: "Сочи", isSelected: true) {
+                                            selectedCountry = "Стамбул"
+                                            isChooseFlightViewPresented.toggle()
+                                        }
+                                        .onTapGesture {
+                                            selectedCountry = "Сочи"
+                                            isChooseFlightViewPresented.toggle()
+                                        }
+                                        Divider()
+                                            .background(AppColors.grey5)
+                                            .padding(.bottom,8)
+                                        CountrySelectionRow(image: "countryImage3", country: "Пхукет", isSelected: true) {
+                                            selectedCountry = "Пхукет"
+                                            isChooseFlightViewPresented.toggle()
+                                        }
+                                        .onTapGesture {
+                                            selectedCountry = "Пхукет"
+                                            isChooseFlightViewPresented.toggle()
+                                        }
+                                    }
+                                    .padding()
+                                }
                             }
                             .padding()
                         }
+                        .padding()
                     }
-                    .padding()
                     Spacer()
                 }
                 .padding(.top, 16)
@@ -175,7 +183,8 @@ struct SearchCountryView: View {
             }
             .navigationBarHidden(true)
             .sheet(isPresented: $isChooseFlightViewPresented) {
-                ChooseFlightView(selectedCountry: selectedCountry ?? "", dismiss: { isChooseFlightViewPresented = false })
+                ChoosenFlightView()
+//                ChoosenFlightView(selectedCountry: selectedCountry ?? "", dismiss: { isChooseFlightViewPresented = false })
             }
         }
     }

@@ -15,7 +15,7 @@ struct ChooseFlightView: View {
         Color(red: 0.14, green: 0.15, blue: 0.16)
             .ignoresSafeArea()
         VStack{
-            Text(" Стана \(selectedCountry)")
+            Text(" Страна \(selectedCountry)")
                 .foregroundColor(AppColors.black)
                 .font(AppFonts.semibold16.font)
             Button("<") {
