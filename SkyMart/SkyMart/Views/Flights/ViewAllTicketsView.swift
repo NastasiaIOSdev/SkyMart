@@ -165,25 +165,28 @@ struct ViewAllTicketsView: View {
                     }
                     .padding([.leading, .trailing])
                     ScrollView(.vertical, showsIndicators: false) {
-                        VStack {
+                        VStack(spacing: 4) {
                             ForEach(viewModel.allTicketsOffers) { ticket in
                                 Button(action: {
                                     //
                                 }) {
-                                    AllTicketsRowView(
-                                       badge: Text(ticket.badge ?? " "),
-                                       price: Text(PriceFormatter.shared.string(from: ticket.price.value)),
-                                       depatureTime: Text(DateFormatter.formatTime(from: ticket.departure.date, format: "HH:mm")),
+                                    AllTicketsRowView (
+                                        badge: Text(ticket.badge ?? " "),
+                                        price: Text(PriceFormatter.shared.string(from: ticket.price.value)),
+                                        depatureTime: Text(DateFormatter.formatTime(from: ticket.departure.date, format: "HH:mm")),
                                         depatureAirport: Text(ticket.departure.airport.rawValue),
                                         arivalTime: Text(DateFormatter.formatTime(from: ticket.arrival.date, format: "HH:mm")),
-                                       arivalAirport: Text(ticket.arrival.airport.rawValue))
-                                        .padding(.top)
-                                        .onTapGesture {
-                                            isTicketScreenViewPresented.toggle()
-                                        }
-                                  }
+                                        arivalAirport: Text(ticket.arrival.airport.rawValue),
+                                        travelTime: Text(DateFormatter.calculateTimeTraveling(depatureDate: ticket.departure.date, arrivalDate: ticket.arrival.date)),
+                                        badgeColor: ticket.badge != nil ? .blue : nil
+                                    )
+                                    .onTapGesture {
+                                        isTicketScreenViewPresented.toggle()
+                                    }
+                                }
                             }
                         }
+                        .padding(0)
                     }
                     .onAppear {
                         viewModel.fetchAllFlaightsOffers()
@@ -216,7 +219,6 @@ struct ViewAllTicketsView: View {
                         .font(AppFonts.regular14.font)
                     }
                 }
-                .padding()
             }
             .navigationBarHidden(true)
             .sheet(isPresented: $isTicketScreenViewPresented) {
@@ -239,29 +241,36 @@ struct AllTicketsRowView: View {
     let depatureAirport: Text
     let arivalTime: Text
     let arivalAirport: Text
+    let travelTime: Text
+    let badgeColor: Color?
     var body: some View {
-        ZStack {
-            
+        ZStack(alignment: .leading) {
             RoundedRectangle(cornerRadius: 8)
                 .foregroundColor(AppColors.grey1)
+                .padding([.leading, .trailing], 16)
                 .frame(height: 120)
-            ZStack {
-                RoundedRectangle(cornerRadius: 50)
-                    .foregroundColor(AppColors.blue)
-                    .frame(width: 143, height: 31)
-                badge
-                    .foregroundColor(AppColors.white)
-                    .italic()
+            if let badge = badge {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 50)
+                        .foregroundColor(badgeColor)
+                        .opacity(badgeColor != nil ? 1 : 0)
+                        .frame(width: 143, height: 31)
+                    badge
+                        .foregroundColor(AppColors.white)
+                        .italic()
+                }
+                .padding(.leading)
+                .padding(.bottom, 115)
+            } else {
+                EmptyView()
             }
-            .padding(.trailing, 215)
-            .padding(.bottom, 120)
-            
             
             VStack(alignment: .leading) {
                 HStack{
                     price
                     Text("₽")
                 }
+                .padding(.leading)
                 .foregroundColor(AppColors.white)
                 .font(AppFonts.semibold22.font)
                 HStack {
@@ -295,15 +304,21 @@ struct AllTicketsRowView: View {
                                 .font(AppFonts.regularItalic14.font)
                         }
                         VStack(alignment: .leading) {
-                            Text("3.5ч в пути / Без пересадок")
-                                .foregroundColor(AppColors.white)
-                                .font(AppFonts.regular14.font)
-                                .lineLimit(1)
+                            HStack(spacing: 0) {
+                                travelTime
+                                Text("в пути /")
+                                Text(" Без пересадок")
+                                   
+                            }
+                            .foregroundColor(AppColors.white)
+                            .font(AppFonts.regular14.font)
+                            .lineLimit(1)
                         }
                         .padding(.leading, 7)
                         Spacer()
                     }
                 }
+                .padding([.leading, .trailing])
             }
             .padding()
         }
