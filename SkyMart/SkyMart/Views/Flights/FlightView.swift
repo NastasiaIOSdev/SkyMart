@@ -20,7 +20,7 @@ struct Offer: Codable, Identifiable {
     let name: String
     let city: String
     let price: Price
-
+    
     enum CodingKeys: String, CodingKey {
         case id, name = "title", city = "town", price
     }
@@ -36,7 +36,7 @@ class NetworkManager {
     private init() {}
     func fetchOffers() -> AnyPublisher<[Offer], Error> {
         guard let url = URL(string: "https://run.mocky.io/v3/214a1713-bac0-4853-907c-a1dfc3cd05fd") else {
-        return Fail(error: NSError(domain: "Invalid URL", code: -1, userInfo: nil))
+            return Fail(error: NSError(domain: "Invalid URL", code: -1, userInfo: nil))
                 .eraseToAnyPublisher()
         }
         return URLSession.shared.dataTaskPublisher(for: url)
@@ -64,6 +64,7 @@ class FlaightsViewModel: ObservableObject {
 
 struct FlightsView: View {
     @State private var isShowingModal = false
+    @State private var cityDeparture = ""
     @StateObject var viewModel = FlaightsViewModel()
     var body: some View {
         NavigationStack{
@@ -91,9 +92,21 @@ struct FlightsView: View {
                                             .foregroundColor(AppColors.grey6)
                                             .padding(.leading)
                                         VStack(alignment: .leading) {
-                                            Text("Mинск")
+                                            TextField("", text: $cityDeparture, prompt: Text("Откуда - Москва")
                                                 .font(AppFonts.medium16.font)
                                                 .foregroundColor(AppColors.white)
+                                            )
+                                            .textContentType(.name)
+                                            .font(AppFonts.medium16.font)
+                                            .foregroundColor(AppColors.white)
+                                            .onChange(of: cityDeparture) { newValue in
+                                                if !newValue.isEmpty && !newValue.isCyrillic() {
+                                                    cityDeparture = ""
+                                                }
+                                            }
+                                            .disableAutocorrection(true)
+                                            .padding(.trailing)
+                                            .textFieldStyle(PlainTextFieldStyle())
                                             Divider()
                                                 .background(AppColors.grey6)
                                             Button(action: {
