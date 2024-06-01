@@ -28,6 +28,7 @@
 		2ECD674E2C09E6BC00A10035 /* SF-Pro-Display-RegularItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2ECD674D2C09E6BB00A10035 /* SF-Pro-Display-RegularItalic.otf */; };
 		2ECD67502C0A30C500A10035 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECD674F2C0A30C500A10035 /* FilterView.swift */; };
 		2ECD67522C0A591D00A10035 /* PriceFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECD67512C0A591D00A10035 /* PriceFormatter.swift */; };
+		2ECD67542C0AD8A600A10035 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECD67532C0AD8A600A10035 /* DateFormatter.swift */; };
 		2EFC54FA2C089F4500BEBF1D /* Tickets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EFC54F92C089F4500BEBF1D /* Tickets.swift */; };
 		2EFC54FC2C089F9F00BEBF1D /* TicketsOffers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EFC54FB2C089F9F00BEBF1D /* TicketsOffers.swift */; };
 		2EFC54FE2C089FEC00BEBF1D /* Offer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EFC54FD2C089FEC00BEBF1D /* Offer.swift */; };
@@ -60,6 +61,7 @@
 		2ECD674D2C09E6BB00A10035 /* SF-Pro-Display-RegularItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-RegularItalic.otf"; sourceTree = "<group>"; };
 		2ECD674F2C0A30C500A10035 /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
 		2ECD67512C0A591D00A10035 /* PriceFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceFormatter.swift; sourceTree = "<group>"; };
+		2ECD67532C0AD8A600A10035 /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		2EFC54F92C089F4500BEBF1D /* Tickets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tickets.swift; sourceTree = "<group>"; };
 		2EFC54FB2C089F9F00BEBF1D /* TicketsOffers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketsOffers.swift; sourceTree = "<group>"; };
 		2EFC54FD2C089FEC00BEBF1D /* Offer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Offer.swift; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 			isa = PBXGroup;
 			children = (
 				2ECD67512C0A591D00A10035 /* PriceFormatter.swift */,
+				2ECD67532C0AD8A600A10035 /* DateFormatter.swift */,
 			);
 			path = Extentions;
 			sourceTree = "<group>";
@@ -340,6 +343,7 @@
 				2EA298EC2C0884BF0069F35A /* ContentView.swift in Sources */,
 				2E7E0E512C0889D400E126DC /* FlightView.swift in Sources */,
 				2EFC54FC2C089F9F00BEBF1D /* TicketsOffers.swift in Sources */,
+				2ECD67542C0AD8A600A10035 /* DateFormatter.swift in Sources */,
 				2ECD67522C0A591D00A10035 /* PriceFormatter.swift in Sources */,
 				2EFC54FE2C089FEC00BEBF1D /* Offer.swift in Sources */,
 				2EA298EA2C0884BF0069F35A /* SkyMartApp.swift in Sources */,

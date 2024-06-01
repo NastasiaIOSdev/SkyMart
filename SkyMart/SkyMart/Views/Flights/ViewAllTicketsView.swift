@@ -16,9 +16,7 @@ struct AllTicketsResponce: Codable {
 
 // MARK: - Ticket
 struct Ticket: Codable, Identifiable, Equatable {
-    static func == (lhs: Ticket, rhs: Ticket) -> Bool {
-           return lhs.id == rhs.id
-       }
+   
     let id: Int
     let badge: String?
     let price: Price3
@@ -40,6 +38,9 @@ struct Ticket: Codable, Identifiable, Equatable {
         case isReturnable = "is_returnable"
         case isExchangable = "is_exchangable"
     }
+    static func == (lhs: Ticket, rhs: Ticket) -> Bool {
+           return lhs.id == rhs.id
+       }
 }
 
 // MARK: - Arrival
@@ -172,9 +173,9 @@ struct ViewAllTicketsView: View {
                                     AllTicketsRowView(
                                        badge: Text(ticket.badge ?? " "),
                                        price: Text(PriceFormatter.shared.string(from: ticket.price.value)),
-                                        depatureTime: Text(ticket.departure.date),
+                                       depatureTime: Text(DateFormatter.formatTime(from: ticket.departure.date, format: "HH:mm")),
                                         depatureAirport: Text(ticket.departure.airport.rawValue),
-                                        arivalTime: Text(ticket.arrival.date),
+                                        arivalTime: Text(DateFormatter.formatTime(from: ticket.arrival.date, format: "HH:mm")),
                                        arivalAirport: Text(ticket.arrival.airport.rawValue))
                                         .padding(.top)
                                         .onTapGesture {
