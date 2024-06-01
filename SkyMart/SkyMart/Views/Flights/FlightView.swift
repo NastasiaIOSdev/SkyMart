@@ -6,12 +6,65 @@
 //
 
 import SwiftUI
+import Foundation
+import Combine
+
+// MARK: - Welcome
+struct OffersResponse: Codable {
+    let offers: [Offer]
+}
+
+// MARK: - Offer
+struct Offer: Codable, Identifiable {
+    let id: Int
+    let name: String
+    let city: String
+    let price: Price
+
+    enum CodingKeys: String, CodingKey {
+        case id, name = "title", city = "town", price
+    }
+}
+
+// MARK: - Price
+struct Price: Codable {
+    let value: Int
+}
+
+class NetworkManager {
+    static let shared = NetworkManager()
+    private init() {}
+    func fetchOffers() -> AnyPublisher<[Offer], Error> {
+        guard let url = URL(string: "https://run.mocky.io/v3/214a1713-bac0-4853-907c-a1dfc3cd05fd") else {
+        return Fail(error: NSError(domain: "Invalid URL", code: -1, userInfo: nil))
+                .eraseToAnyPublisher()
+        }
+        return URLSession.shared.dataTaskPublisher(for: url)
+            .map { $0.data}
+            .decode(type: OffersResponse.self, decoder: JSONDecoder())
+            .map { $0.offers}
+            .eraseToAnyPublisher()
+    }
+}
+
+class FlaightsViewModel: ObservableObject {
+    @Published var flightOffers: [Offer] = []
+    private var cancellables: Set<AnyCancellable> = []
+    
+    func fetchFlightsOffers() {
+        NetworkManager.shared.fetchOffers()
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { _ in },
+                  receiveValue: { [weak self] offers in
+                self?.flightOffers = offers
+            })
+            .store(in: &cancellables)
+    }
+}
 
 struct FlightsView: View {
     @State private var isShowingModal = false
-    let name = ["Die Antwoord", "Socrat& Lera"]
-    let city = ["Будапешт", "Санкт- Петербург"]
-    let price = ["22 264", "2 390"]
+    @StateObject var viewModel = FlaightsViewModel()
     var body: some View {
         NavigationStack{
             ZStack {
@@ -66,11 +119,14 @@ struct FlightsView: View {
                         .padding()
                         ScrollView (.horizontal, showsIndicators: false) {
                             HStack(spacing: 67) {
-                                ForEach(0 ..< 2) { index in
-                                    CollectionCellView(image: Image("image_\(index + 1)"), name: Text(name[index]), city: Text(city[index]), price: Text(price[index]))
+                                ForEach(viewModel.flightOffers) { offer in
+                                    CollectionCellView(image: Image("image_\(offer.id)"), name: Text(offer.name), city: Text(offer.city), price: Text("\(offer.price.value)"))
                                 }
                             }
                             .padding(.leading, 16)
+                        }
+                        .onAppear {
+                            viewModel.fetchFlightsOffers()
                         }
                         Spacer()
                     }

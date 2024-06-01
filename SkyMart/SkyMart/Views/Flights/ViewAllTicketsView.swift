@@ -6,9 +6,127 @@
 //
 
 import SwiftUI
+import Foundation
+import Combine
+
+// MARK: - Welcome
+struct AllTicketsResponce: Codable {
+    let tickets: [Ticket]
+}
+
+// MARK: - Ticket
+struct Ticket: Codable, Identifiable, Equatable {
+    static func == (lhs: Ticket, rhs: Ticket) -> Bool {
+           return lhs.id == rhs.id
+       }
+    let id: Int
+    let badge: String?
+    let price: Price3
+    let providerName, company: String
+    let departure, arrival: Arrival
+    let hasTransfer, hasVisaTransfer: Bool
+    let luggage: Luggage
+    let handLuggage: HandLuggage
+    let isReturnable, isExchangable: Bool
+
+    enum CodingKeys: String, CodingKey {
+        case id, badge, price
+        case providerName = "provider_name"
+        case company, departure, arrival
+        case hasTransfer = "has_transfer"
+        case hasVisaTransfer = "has_visa_transfer"
+        case luggage
+        case handLuggage = "hand_luggage"
+        case isReturnable = "is_returnable"
+        case isExchangable = "is_exchangable"
+    }
+}
+
+// MARK: - Arrival
+struct Arrival: Codable {
+    let town: Town
+    let date: String
+    let airport: Airport
+}
+
+enum Airport: String, Codable {
+    case aer = "AER"
+    case vko = "VKO"
+}
+
+enum Town: String, Codable {
+    case москва = "Москва"
+    case сочи = "Сочи"
+}
+
+// MARK: - HandLuggage
+struct HandLuggage: Codable {
+    let hasHandLuggage: Bool
+    let size: String?
+
+    enum CodingKeys: String, CodingKey {
+        case hasHandLuggage = "has_hand_luggage"
+        case size
+    }
+}
+
+// MARK: - Luggage
+struct Luggage: Codable {
+    let hasLuggage: Bool
+    let price: Price3?
+
+    enum CodingKeys: String, CodingKey {
+        case hasLuggage = "has_luggage"
+        case price
+    }
+}
+
+// MARK: - Price
+struct Price3: Codable {
+    let value: Int
+}
+
+class NetworkManager3 {
+    static let shared = NetworkManager3()
+    private init() {}
+    func fetchAllTickets() -> AnyPublisher<[Ticket], Error> {
+        guard let url = URL(string: "https://run.mocky.io/v3/670c3d56-7f03-4237-9e34-d437a9e56ebf") else {
+        return Fail(error: NSError(domain: "Invalid URL", code: -1, userInfo: nil))
+                .eraseToAnyPublisher()
+        }
+        return URLSession.shared.dataTaskPublisher(for: url)
+            .map { $0.data}
+            .decode(type: AllTicketsResponce.self, decoder: JSONDecoder())
+            .map { $0.tickets}
+            .eraseToAnyPublisher()
+    }
+}
+
+class AllTicketsViewModel: ObservableObject {
+    @Published var allTicketsOffers: [Ticket] = []
+    private var cancellables: Set<AnyCancellable> = []
+    
+    func fetchAllFlaightsOffers() {
+        NetworkManager3.shared.fetchAllTickets()
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .failure(let error):
+                    print("Error: \(error)")
+                case .finished:
+                    print("Закончилась загрузка билетов")
+                }
+            },
+                  receiveValue: { [weak self] tickets in
+                self?.allTicketsOffers = tickets
+            })
+            .store(in: &cancellables)
+    }
+}
 
 struct ViewAllTicketsView: View {
     @Environment(\.dismiss) var dismiss
+    @StateObject var viewModel = AllTicketsViewModel()
     @State private var isTicketScreenViewPresented = false
     var body: some View {
         NavigationView {
@@ -45,82 +163,32 @@ struct ViewAllTicketsView: View {
                         }
                     }
                     .padding([.leading, .trailing])
-                    ScrollView {
+                    ScrollView(.vertical, showsIndicators: false) {
                         VStack {
-                        Button(action: {
-                            //
-                        }) {
-                            ZStack {
-                                
-                                RoundedRectangle(cornerRadius: 8)
-                                    .foregroundColor(AppColors.grey1)
-                                    .frame(height: 120)
-                                ZStack {
-                                    RoundedRectangle(cornerRadius: 50)
-                                        .foregroundColor(AppColors.blue)
-                                        .frame(width: 143, height: 31)
-                                    Text("Самый удобный")
-                                        .foregroundColor(AppColors.white)
-                                        .italic()
-                                }
-                                .padding(.trailing, 215)
-                                .padding(.bottom, 120)
-                                
-                                
-                                VStack(alignment: .leading) {
-                                    Text("7 386 ₽ ")
-                                        .foregroundColor(AppColors.white)
-                                        .font(AppFonts.semibold22.font)
-                                    HStack {
-                                        HStack {
-                                            Circle()
-                                                .frame(width: 24)
-                                                .foregroundColor(AppColors.red)
-                                            
+                            ForEach(viewModel.allTicketsOffers) { ticket in
+                                Button(action: {
+                                    //
+                                }) {
+                                    AllTicketsRowView(
+                                       badge: Text(ticket.badge ?? " "),
+                                       price: Text(PriceFormatter.shared.string(from: ticket.price.value)),
+                                        depatureTime: Text(ticket.departure.date),
+                                        depatureAirport: Text(ticket.departure.airport.rawValue),
+                                        arivalTime: Text(ticket.arrival.date),
+                                       arivalAirport: Text(ticket.arrival.airport.rawValue))
+                                        .padding(.top)
+                                        .onTapGesture {
+                                            isTicketScreenViewPresented.toggle()
                                         }
-                                        HStack(alignment: .top) {
-                                            VStack(alignment: .leading) {
-                                                Text("12:00")
-                                                    .foregroundColor(AppColors.white)
-                                                    .italic()
-                                                Text("DME")
-                                                    .foregroundColor(AppColors.grey6)
-                                                    .italic()
-                                                    .lineLimit(1)
-                                            }
-                                            Image("line")
-                                                .foregroundColor(AppColors.grey6)
-                                                .padding(.top, 9)
-                                            VStack(alignment: .leading) {
-                                                Text("15:35")
-                                                    .foregroundColor(AppColors.white)
-                                                    .italic()
-                                                Text("AER")
-                                                    .foregroundColor(AppColors.grey6)
-                                                    .italic()
-                                                    .lineLimit(1)
-                                            }
-                                            VStack(alignment: .leading) {
-                                                Text("3.5ч в пути / Без пересадок")
-                                                    .foregroundColor(AppColors.white)
-                                                    .font(AppFonts.regular14.font)
-                                                    .lineLimit(1)
-                                            }
-                                            .padding(.leading, 7)
-                                            Spacer()
-                                        }
-                                    }
-                                }
-                                .padding()
+                                  }
                             }
-                            .padding(.top)
-                            .onTapGesture {
-                                isTicketScreenViewPresented.toggle()
-                            }
-                          }
                         }
                     }
+                    .onAppear {
+                        viewModel.fetchAllFlaightsOffers()
+                    }
                     Spacer()
+                    
                     ZStack {
                         RoundedRectangle(cornerRadius: 50)
                             .foregroundColor(AppColors.blue)
@@ -160,5 +228,83 @@ struct ViewAllTicketsView: View {
 struct ViewAllTicketsView_Previews: PreviewProvider {
     static var previews: some View {
         ViewAllTicketsView()
+    }
+}
+
+struct AllTicketsRowView: View {
+    let badge: Text
+    let price: Text
+    let depatureTime: Text
+    let depatureAirport: Text
+    let arivalTime: Text
+    let arivalAirport: Text
+    var body: some View {
+        ZStack {
+            
+            RoundedRectangle(cornerRadius: 8)
+                .foregroundColor(AppColors.grey1)
+                .frame(height: 120)
+            ZStack {
+                RoundedRectangle(cornerRadius: 50)
+                    .foregroundColor(AppColors.blue)
+                    .frame(width: 143, height: 31)
+                badge
+                    .foregroundColor(AppColors.white)
+                    .italic()
+            }
+            .padding(.trailing, 215)
+            .padding(.bottom, 120)
+            
+            
+            VStack(alignment: .leading) {
+                HStack{
+                    price
+                    Text("₽")
+                }
+                .foregroundColor(AppColors.white)
+                .font(AppFonts.semibold22.font)
+                HStack {
+                    HStack {
+                        Circle()
+                            .frame(width: 24)
+                            .foregroundColor(AppColors.red)
+                        
+                    }
+                    HStack(alignment: .top) {
+                        VStack(alignment: .leading) {
+                            depatureTime
+                                .foregroundColor(AppColors.white)
+                                .lineLimit(1)
+                                .font(AppFonts.regularItalic14.font)
+                            depatureAirport
+                                .foregroundColor(AppColors.grey6)
+                                .font(AppFonts.regularItalic14.font)
+                                
+                        }
+                        Image("line")
+                            .foregroundColor(AppColors.grey6)
+                            .padding(.top, 9)
+                        VStack(alignment: .leading) {
+                            arivalTime
+                                .foregroundColor(AppColors.white)
+                                .lineLimit(1)
+                                .font(AppFonts.regularItalic14.font)
+                            arivalAirport
+                                .foregroundColor(AppColors.grey6)
+                                .font(AppFonts.regularItalic14.font)
+                        }
+                        VStack(alignment: .leading) {
+                            Text("3.5ч в пути / Без пересадок")
+                                .foregroundColor(AppColors.white)
+                                .font(AppFonts.regular14.font)
+                                .lineLimit(1)
+                        }
+                        .padding(.leading, 7)
+                        Spacer()
+                    }
+                }
+            }
+            .padding()
+        }
     }
 }

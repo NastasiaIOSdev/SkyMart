@@ -26,9 +26,11 @@
 		2EA2990E2C08888D0069F35A /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA2990D2C08888D0069F35A /* AppColors.swift */; };
 		2EBD6CB12C089D3A00E35D25 /* ChoosenFlightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBD6CB02C089D3A00E35D25 /* ChoosenFlightView.swift */; };
 		2ECD674E2C09E6BC00A10035 /* SF-Pro-Display-RegularItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2ECD674D2C09E6BB00A10035 /* SF-Pro-Display-RegularItalic.otf */; };
+		2ECD67502C0A30C500A10035 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECD674F2C0A30C500A10035 /* FilterView.swift */; };
+		2ECD67522C0A591D00A10035 /* PriceFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECD67512C0A591D00A10035 /* PriceFormatter.swift */; };
 		2EFC54FA2C089F4500BEBF1D /* Tickets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EFC54F92C089F4500BEBF1D /* Tickets.swift */; };
 		2EFC54FC2C089F9F00BEBF1D /* TicketsOffers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EFC54FB2C089F9F00BEBF1D /* TicketsOffers.swift */; };
-		2EFC54FE2C089FEC00BEBF1D /* Offers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EFC54FD2C089FEC00BEBF1D /* Offers.swift */; };
+		2EFC54FE2C089FEC00BEBF1D /* Offer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EFC54FD2C089FEC00BEBF1D /* Offer.swift */; };
 		2EFC55002C08A0BC00BEBF1D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EFC54FF2C08A0BC00BEBF1D /* Constants.swift */; };
 		2EFC55022C08A20600BEBF1D /* ViewAllTicketsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EFC55012C08A20600BEBF1D /* ViewAllTicketsView.swift */; };
 		2EFC55042C08A23D00BEBF1D /* TicketScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EFC55032C08A23D00BEBF1D /* TicketScreenView.swift */; };
@@ -56,9 +58,11 @@
 		2EA2990D2C08888D0069F35A /* AppColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
 		2EBD6CB02C089D3A00E35D25 /* ChoosenFlightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoosenFlightView.swift; sourceTree = "<group>"; };
 		2ECD674D2C09E6BB00A10035 /* SF-Pro-Display-RegularItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-RegularItalic.otf"; sourceTree = "<group>"; };
+		2ECD674F2C0A30C500A10035 /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
+		2ECD67512C0A591D00A10035 /* PriceFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceFormatter.swift; sourceTree = "<group>"; };
 		2EFC54F92C089F4500BEBF1D /* Tickets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tickets.swift; sourceTree = "<group>"; };
 		2EFC54FB2C089F9F00BEBF1D /* TicketsOffers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketsOffers.swift; sourceTree = "<group>"; };
-		2EFC54FD2C089FEC00BEBF1D /* Offers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Offers.swift; sourceTree = "<group>"; };
+		2EFC54FD2C089FEC00BEBF1D /* Offer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Offer.swift; sourceTree = "<group>"; };
 		2EFC54FF2C08A0BC00BEBF1D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		2EFC55012C08A20600BEBF1D /* ViewAllTicketsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAllTicketsView.swift; sourceTree = "<group>"; };
 		2EFC55032C08A23D00BEBF1D /* TicketScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketScreenView.swift; sourceTree = "<group>"; };
@@ -137,6 +141,7 @@
 				2E7E0E502C0889D400E126DC /* FlightView.swift */,
 				2E7E0E522C0889FD00E126DC /* SearchCountryView.swift */,
 				2EBD6CB02C089D3A00E35D25 /* ChoosenFlightView.swift */,
+				2ECD674F2C0A30C500A10035 /* FilterView.swift */,
 				2EFC55012C08A20600BEBF1D /* ViewAllTicketsView.swift */,
 				2EFC55032C08A23D00BEBF1D /* TicketScreenView.swift */,
 				2ECD674C2C09B1CB00A10035 /* Trash */,
@@ -157,6 +162,7 @@
 		2EA298FB2C0886B50069F35A /* Extentions */ = {
 			isa = PBXGroup;
 			children = (
+				2ECD67512C0A591D00A10035 /* PriceFormatter.swift */,
 			);
 			path = Extentions;
 			sourceTree = "<group>";
@@ -193,9 +199,9 @@
 		2EA298FF2C0886C90069F35A /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				2EFC54FD2C089FEC00BEBF1D /* Offers.swift */,
-				2EFC54F92C089F4500BEBF1D /* Tickets.swift */,
+				2EFC54FD2C089FEC00BEBF1D /* Offer.swift */,
 				2EFC54FB2C089F9F00BEBF1D /* TicketsOffers.swift */,
+				2EFC54F92C089F4500BEBF1D /* Tickets.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -326,6 +332,7 @@
 				2E7E0E532C0889FD00E126DC /* SearchCountryView.swift in Sources */,
 				2E7E0E5D2C088AB700E126DC /* ProfileView.swift in Sources */,
 				2EFC54FA2C089F4500BEBF1D /* Tickets.swift in Sources */,
+				2ECD67502C0A30C500A10035 /* FilterView.swift in Sources */,
 				2EFC55042C08A23D00BEBF1D /* TicketScreenView.swift in Sources */,
 				2EA2990E2C08888D0069F35A /* AppColors.swift in Sources */,
 				2E7E0E552C088A1F00E126DC /* ChooseFlightView.swift in Sources */,
@@ -333,7 +340,8 @@
 				2EA298EC2C0884BF0069F35A /* ContentView.swift in Sources */,
 				2E7E0E512C0889D400E126DC /* FlightView.swift in Sources */,
 				2EFC54FC2C089F9F00BEBF1D /* TicketsOffers.swift in Sources */,
-				2EFC54FE2C089FEC00BEBF1D /* Offers.swift in Sources */,
+				2ECD67522C0A591D00A10035 /* PriceFormatter.swift in Sources */,
+				2EFC54FE2C089FEC00BEBF1D /* Offer.swift in Sources */,
 				2EA298EA2C0884BF0069F35A /* SkyMartApp.swift in Sources */,
 				2E7E0E572C088A4E00E126DC /* HotelsView.swift in Sources */,
 				2EBD6CB12C089D3A00E35D25 /* ChoosenFlightView.swift in Sources */,

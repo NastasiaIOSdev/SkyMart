@@ -6,9 +6,70 @@
 //
 
 import SwiftUI
+import Foundation
+import Combine
+
+// MARK: - Welcome
+struct TicketsResponse: Codable {
+    let ticketsOffers: [TicketsOffer]
+
+    enum CodingKeys: String, CodingKey {
+        case ticketsOffers = "tickets_offers"
+    }
+}
+
+// MARK: - TicketsOffer
+struct TicketsOffer: Codable, Identifiable {
+    let id: Int
+    let title: String
+    let time: [String]
+    let price: Price2
+
+    enum CodingKeys: String, CodingKey {
+        case id, title
+        case time = "time_range"
+        case price
+    }
+}
+// MARK: - Price
+struct Price2: Codable {
+    let value: Int
+}
+
+class NetworkManager2 {
+    static let shared = NetworkManager2()
+    private init() {}
+    func fetchTickets() -> AnyPublisher<[TicketsOffer], Error> {
+        guard let url = URL(string: "https://run.mocky.io/v3/7e55bf02-89ff-4847-9eb7-7d83ef884017") else {
+        return Fail(error: NSError(domain: "Invalid URL", code: -1, userInfo: nil))
+                .eraseToAnyPublisher()
+        }
+        return URLSession.shared.dataTaskPublisher(for: url)
+            .map { $0.data}
+            .decode(type: TicketsResponse.self, decoder: JSONDecoder())
+            .map { $0.ticketsOffers}
+            .eraseToAnyPublisher()
+    }
+}
+
+class TicketsViewModel: ObservableObject {
+    @Published var ticketsOffers: [TicketsOffer] = []
+    private var cancellables: Set<AnyCancellable> = []
+    
+    func fetchTicketsOffers() {
+        NetworkManager2.shared.fetchTickets()
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { _ in },
+                  receiveValue: { [weak self] tickets in
+                self?.ticketsOffers = tickets
+            })
+            .store(in: &cancellables)
+    }
+}
 
 struct ChoosenFlightView: View {
     @Environment(\.dismiss) var dismiss
+    @StateObject var viewModel = TicketsViewModel()
     let name = ["обратно", "24 фев, сб", "1,эконом", ""]
     let image = ["plus", nil , "human", "Icon"]
     @State private var isViewAllTicketsViewPresented = false
@@ -86,11 +147,18 @@ struct ChoosenFlightView: View {
                                             .foregroundColor(AppColors.white)
                                             .font(AppFonts.semibold20.font)
                                             .multilineTextAlignment(.leading)
-                                        DirectFlightsCellView()
+                                        VStack {
+                                            ForEach(viewModel.ticketsOffers) { ticket in
+                                                DirectFlightsCellView(title: Text(ticket.title), time: Text(ticket.time.joined(separator: ", ")), price: Text("\(ticket.price.value)"))
+                                                Divider()
+                                                    .background(.white)
+                                            }
+                                        }
+                                        .onAppear {
+                                            viewModel.fetchTicketsOffers()
+                                        }
                                             .padding(.top, 8)
-                                        Divider()
-                                            .background(.white)
-                                        Spacer()
+
                                         Button(action: {
                                             //
                                         }) {
@@ -101,6 +169,7 @@ struct ChoosenFlightView: View {
                                                 Text("Показать все")
                                                     .foregroundColor(AppColors.blue)
                                             }
+                                        
                                             .onTapGesture {
                                                 isViewAllTicketsViewPresented.toggle()
                                             }
@@ -198,6 +267,9 @@ struct FilterCellView: View {
 }
 
 struct DirectFlightsCellView: View {
+    let title: Text
+    let time: Text
+    let price: Text
     var body: some View {
         Button(action: {
             //
@@ -205,29 +277,30 @@ struct DirectFlightsCellView: View {
             ZStack {
                 HStack(alignment: .top) {
                     Circle()
-                        .frame(width: 24)
-                        .foregroundColor(AppColors.red)
+                        .frame(width: 24, height: 24)
+                        .foregroundColor(AppColors.white)
                     VStack(alignment: .leading) {
                         HStack{
-                            Text("Уральские авиалинии")
+                            title
                                 .foregroundColor(AppColors.white)
                                 .italic()
                             Spacer()
                             HStack {
-                                Text("2 390 ₽")
+                                price
+                                Text("₽")
                                 Image("arrowRight")
-                                
                             }
+                            .font(AppFonts.medium16.font)
                             .foregroundColor(AppColors.blue)
                         }
-                        Text("07:00 09:10 10:00 11:00 12:00 13:00 12:00")
+                        time
                             .foregroundColor(AppColors.white)
-                            .italic()
+                            .font(AppFonts.regular14.font)
                             .lineLimit(1)
                     }
                 }
             }
-            
+            .padding(.top, 4)
         }
     }
 }
