@@ -12,7 +12,7 @@ import Combine
 // MARK: - Welcome
 struct TicketsResponse: Codable {
     let ticketsOffers: [TicketsOffer]
-
+    
     enum CodingKeys: String, CodingKey {
         case ticketsOffers = "tickets_offers"
     }
@@ -24,7 +24,7 @@ struct TicketsOffer: Codable, Identifiable {
     let title: String
     let time: [String]
     let price: Price2
-
+    
     enum CodingKeys: String, CodingKey {
         case id, title
         case time = "time_range"
@@ -41,7 +41,7 @@ class NetworkManager2 {
     private init() {}
     func fetchTickets() -> AnyPublisher<[TicketsOffer], Error> {
         guard let url = URL(string: "https://run.mocky.io/v3/7e55bf02-89ff-4847-9eb7-7d83ef884017") else {
-        return Fail(error: NSError(domain: "Invalid URL", code: -1, userInfo: nil))
+            return Fail(error: NSError(domain: "Invalid URL", code: -1, userInfo: nil))
                 .eraseToAnyPublisher()
         }
         return URLSession.shared.dataTaskPublisher(for: url)
@@ -67,16 +67,60 @@ class TicketsViewModel: ObservableObject {
     }
 }
 
+struct DatePickerModalView: View {
+    @Binding var isModalPresented: Bool
+    @Binding var selectedDate: Date
+    var body: some View {
+        ZStack {
+            Color(red: 0.14, green: 0.15, blue: 0.16)
+                .ignoresSafeArea()
+            VStack {
+                DatePicker("",
+                           selection: $selectedDate,
+                           displayedComponents: [.date])
+                .datePickerStyle(GraphicalDatePickerStyle())
+                
+                .padding()
+                Button("OK") {
+                    isModalPresented = false
+                }
+                .padding()
+            }
+            .background(.gray)
+        }
+    }
+}
+
 struct ChoosenFlightView: View {
     @Environment(\.dismiss) var dismiss
+    @Binding var cityDeparture: String
+    @Binding var cityArrival: String
     @StateObject var viewModel = TicketsViewModel()
-    let name = ["обратно", "24 фев, сб", "1,эконом", ""]
-    let image = ["plus", nil , "human", "Icon"]
+    
     @State private var isViewAllTicketsViewPresented = false
+    @State private var isDatePickerModalPresented = false
+    @State private var selectedDate = Date()
+    @State private var timeArrival = Date()
+    @State private var arrivalDateButtonText = "+ обратно"
+
+    var name: [String] {
+        ["обратно",DateFormatter.currentDateFormatter() , "1,эконом", ""]
+    }
+    let image = ["plus", nil , "human", "Icon"]
+  
+    private var returnButtonText: String {
+        if selectedDate == nil {
+             return "+ Обратно"
+
+         } else {
+             return DateFormatter.formatDate(selectedDate)
+         }
+     }
+    
     var body: some View {
         NavigationView {
             ZStack {
-                Color(.black)
+                Color.black
                     .ignoresSafeArea()
                 VStack(spacing: 47) {
                     VStack(alignment: .leading, spacing: 16) {
@@ -95,7 +139,7 @@ struct ChoosenFlightView: View {
                                 }
                                 VStack(alignment: .leading) {
                                     HStack{
-                                        Text("Mинск")
+                                        Text(cityDeparture)
                                             .font(AppFonts.medium16.font)
                                             .foregroundColor(AppColors.white)
                                         Spacer()
@@ -113,7 +157,7 @@ struct ChoosenFlightView: View {
                                         .background(AppColors.grey6)
                                         .padding(.trailing)
                                     HStack{
-                                        Text("Сочи")
+                                        Text(cityArrival)
                                             .font(AppFonts.medium16.font)
                                             .foregroundColor(AppColors.white)
                                         Spacer()
@@ -131,11 +175,44 @@ struct ChoosenFlightView: View {
                         }
                         ScrollView (.horizontal, showsIndicators: false) {
                             HStack(spacing: 8) {
-                                ForEach(0 ..< 4) { index in
+                                Button(action: {
+                                                isDatePickerModalPresented.toggle()
+                                            }) {
+                                                    ZStack {
+                                                        RoundedRectangle(cornerRadius: 16)
+                                                            .foregroundColor(AppColors.grey3)
+                                                            .frame(height: 33)
+                                                        HStack {
+                                                            if isDatePickerModalPresented {
+                                                                Text(returnButtonText)
+                                                                    .foregroundColor(.white)
+                                                                    .italic()
+                                                            } else {
+                                                                Text(arrivalDateButtonText)
+                                                                    .foregroundColor(.white)
+                                                                    .italic()
+                                                            }
+                                                            
+                                                        }
+                                                        .padding([.leading, .trailing])
+                                                    }
+                                                }
+                                                .sheet(isPresented: $isDatePickerModalPresented) {
+                                                    DatePickerModalView(isModalPresented: $isDatePickerModalPresented, selectedDate: $timeArrival)
+                                                        .onDisappear {
+                                                            if timeArrival != selectedDate {
+                                                                selectedDate = timeArrival
+                                                                arrivalDateButtonText = DateFormatter.formatDate(selectedDate)
+                                                            }
+                                                        }
+                                                }
+                                ForEach(1 ..< 4) { index in
                                     FilterCellView(image: Image(image[index] ?? ""), name: Text(name[index]))
+                               
                                 }
                             }
                         }
+                        
                         ScrollView (.vertical, showsIndicators: false) {
                             VStack {
                                 ZStack{
@@ -149,7 +226,11 @@ struct ChoosenFlightView: View {
                                             .multilineTextAlignment(.leading)
                                         VStack {
                                             ForEach(viewModel.ticketsOffers) { ticket in
-                                                DirectFlightsCellView(title: Text(ticket.title), time: Text(ticket.time.joined(separator: ", ")), price: Text("\(ticket.price.value)"))
+                                                DirectFlightsCellView(
+                                                    title: Text(ticket.title),
+                                                    time: Text(ticket.time.joined(separator: ", ")),
+                                                    price: Text(PriceFormatter.shared.string(from: ticket.price.value))
+                                                )
                                                 Divider()
                                                     .background(.white)
                                             }
@@ -157,8 +238,8 @@ struct ChoosenFlightView: View {
                                         .onAppear {
                                             viewModel.fetchTicketsOffers()
                                         }
-                                            .padding(.top, 8)
-
+                                        .padding(.top, 8)
+                                        
                                         Button(action: {
                                             //
                                         }) {
@@ -169,7 +250,6 @@ struct ChoosenFlightView: View {
                                                 Text("Показать все")
                                                     .foregroundColor(AppColors.blue)
                                             }
-                                        
                                             .onTapGesture {
                                                 isViewAllTicketsViewPresented.toggle()
                                             }
@@ -238,32 +318,32 @@ struct FilterCellView: View {
         VStack(alignment: .leading, spacing: 4) {
             
             if let image = image {
-                            Button(action: {
-                                //
-                            }) {
-                                ZStack {
-                                    RoundedRectangle(cornerRadius: 16)
-                                        .foregroundColor(AppColors.grey3)
-                                        .frame(height: 33)
-                                    HStack {
-                                        image
-                                            .frame(width: 15, height: 15)
-                                            .foregroundColor(AppColors.white)
-                                        name
-                                            .italic()
-                                            .foregroundColor(AppColors.white)
-                                    }
-                                    .padding([.leading, .trailing])
-                                }
-                            }
-                        } else {
+                Button(action: {
+                    //
+                }) {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 16)
+                            .foregroundColor(AppColors.grey3)
+                            .frame(height: 33)
+                        HStack {
+                            image
+                                .frame(width: 15, height: 15)
+                                .foregroundColor(AppColors.white)
                             name
                                 .italic()
                                 .foregroundColor(AppColors.white)
-                                .padding([.leading, .trailing])
                         }
+                        .padding([.leading, .trailing])
+                    }
+                }
+            } else {
+                name
+                    .italic()
+                    .foregroundColor(AppColors.white)
+                    .padding([.leading, .trailing])
             }
         }
+    }
 }
 
 struct DirectFlightsCellView: View {
@@ -305,8 +385,8 @@ struct DirectFlightsCellView: View {
     }
 }
 
-struct ChoosenFlightView_Previews: PreviewProvider {
-    static var previews: some View {
-        ChoosenFlightView()
-    }
-}
+//struct ChoosenFlightView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ChoosenFlightView()
+//    }
+//}

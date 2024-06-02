@@ -39,5 +39,17 @@ extension DateFormatter {
         }
         return "\(hours) ч \(minutes) мин"
     }
+    
+    static func currentDateFormatter() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd MMM, E"
+        return dateFormatter.string(from: Date())
+    }
+    
+    static func formatDate(_ date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd MMM, E"
+        return dateFormatter.string(from: date)
+    }
 }
 

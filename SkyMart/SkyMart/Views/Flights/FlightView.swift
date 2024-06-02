@@ -64,7 +64,7 @@ class FlaightsViewModel: ObservableObject {
 
 struct FlightsView: View {
     @State private var isShowingModal = false
-    @State private var cityDeparture = ""
+    @State private var cityDeparture: String = UserDefaults.standard.string(forKey: "lastCityDeparture") ?? ""
     @StateObject var viewModel = FlaightsViewModel()
     var body: some View {
         NavigationStack{
@@ -92,7 +92,11 @@ struct FlightsView: View {
                                             .foregroundColor(AppColors.grey6)
                                             .padding(.leading)
                                         VStack(alignment: .leading) {
-                                            TextField("", text: $cityDeparture, prompt: Text("Откуда - Москва")
+                                            
+                                            TextField(
+                                                "",
+                                                text: $cityDeparture,
+                                                prompt: Text("Откуда - Москва")
                                                 .font(AppFonts.medium16.font)
                                                 .foregroundColor(AppColors.white)
                                             )
@@ -100,6 +104,7 @@ struct FlightsView: View {
                                             .font(AppFonts.medium16.font)
                                             .foregroundColor(AppColors.white)
                                             .onChange(of: cityDeparture) { newValue in
+                                                UserDefaults.standard.set(newValue, forKey: "lastCityDeparture")
                                                 if !newValue.isEmpty && !newValue.isCyrillic() {
                                                     cityDeparture = ""
                                                 }
@@ -119,7 +124,7 @@ struct FlightsView: View {
                                         }
                                         .padding()
                                         .sheet(isPresented: $isShowingModal) {
-                                            SearchCountryView()
+                                            SearchCountryView(cityDeparture: $cityDeparture)
                                         }
                                     }
                                     .padding()
@@ -133,7 +138,11 @@ struct FlightsView: View {
                         ScrollView (.horizontal, showsIndicators: false) {
                             HStack(spacing: 67) {
                                 ForEach(viewModel.flightOffers) { offer in
-                                    CollectionCellView(image: Image("image_\(offer.id)"), name: Text(offer.name), city: Text(offer.city), price: Text("\(offer.price.value)"))
+                                    CollectionCellView(image: Image("image_\(offer.id)"),
+                                                       name: Text(offer.name),
+                                                       city: Text(offer.city),
+                                                       price: Text(PriceFormatter.shared.string(from: offer.price.value))
+                                    )
                                 }
                             }
                             .padding(.leading, 16)
@@ -167,20 +176,15 @@ struct CollectionCellView: View {
             city
                 .font(AppFonts.regular14.font)
                 .foregroundColor(AppColors.white)
-            HStack{
+            HStack(spacing: 4){
                 Image("airplane")
-                    .foregroundColor(AppColors.white)
-                    .frame(width: 17)
+                    .frame(width: 16)
                 Text("от")
-                    .font(AppFonts.regular14.font)
-                    .foregroundColor(AppColors.white)
                 price
-                    .font(AppFonts.regular14.font)
-                    .foregroundColor(AppColors.white)
                 Text("₽")
-                    .font(AppFonts.regular14.font)
-                    .foregroundColor(AppColors.white)
             }
+            .font(AppFonts.regular14.font)
+            .foregroundColor(AppColors.white)
         }
         .frame(width: 132, height: 213)
     }

@@ -149,15 +149,22 @@ struct ViewAllTicketsView: View {
                             }
                             VStack(alignment: .leading, spacing: 4) {
                                 HStack{
-                                    Text("Москва-Сочи")
+                                    HStack(spacing: 0) {
+                                        Text("Москва")
+                                        Text("-")
+                                        Text("Сочи")
+                                    }
                                         .font(AppFonts.semibold16.font)
                                         .foregroundColor(AppColors.white)
                                     Spacer()
                                 }
                                 HStack{
-                                    Text("Сочи")
-                                        .font(AppFonts.medium16.font)
-                                        .foregroundColor(AppColors.white)
+                                    HStack(spacing: 0) {
+                                        Text("23 февраля")
+                                        Text(", 1 пассажир")
+                                    }
+                                        .font(AppFonts.semibold14.font)
+                                        .foregroundColor(AppColors.grey6)
                                     Spacer()
                                 }
                             }
@@ -172,7 +179,8 @@ struct ViewAllTicketsView: View {
                                 }) {
                                     AllTicketsRowView (
                                         badge: Text(ticket.badge ?? " "),
-                                        price: Text(PriceFormatter.shared.string(from: ticket.price.value)),
+                                        price: Text(PriceFormatter.shared.string(from: ticket.price.value)
+                                                   ),
                                         depatureTime: Text(DateFormatter.formatTime(from: ticket.departure.date, format: "HH:mm")),
                                         depatureAirport: Text(ticket.departure.airport.rawValue),
                                         arivalTime: Text(DateFormatter.formatTime(from: ticket.arrival.date, format: "HH:mm")),

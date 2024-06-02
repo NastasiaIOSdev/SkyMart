@@ -9,10 +9,15 @@ import SwiftUI
 
 struct SearchCountryView: View {
     @State private var isClosedModal = false
+    @State private var isShowingDifficultRouteViewModal = false
+    @State private var isShowingWeekendsViewModal = false
+    @State private var isShowingHotTicketsViewModal = false
+    @Binding var cityDeparture: String
     @Environment(\.dismiss) var dismiss
     @State private var searchText = "Куда - Турция"
     @State private var selectedCountry: String?
     @State private var isChooseFlightViewPresented = false
+    @State private var cityArrival: String = UserDefaults.standard.string(forKey: "lastCityArrival") ?? ""
     var body: some View {
         NavigationView {
             ZStack {
@@ -39,7 +44,7 @@ struct SearchCountryView: View {
                                             .foregroundColor(AppColors.grey6)
                                             .frame(width: 24)
                                             .padding(.leading)
-                                        Text("Mинск")
+                                        Text(cityDeparture)
                                             .font(AppFonts.medium16.font)
                                             .foregroundColor(AppColors.white)
                                     }
@@ -51,12 +56,19 @@ struct SearchCountryView: View {
                                             .foregroundColor(AppColors.white)
                                             .frame(width: 24)
                                             .padding(.leading)
-                                        TextField("Куда - Турция", text: $searchText)
+                                        TextField(
+                                            "",
+                                            text: $searchText,
+                                            prompt: Text("Куда - Турция")
                                             .font(AppFonts.medium16.font)
                                             .foregroundColor(AppColors.grey6)
+                                            )
+                                        .textContentType(.name)
+                                        .font(AppFonts.medium16.font)
+                                        .foregroundColor(AppColors.white)
                                         Spacer()
                                         Button(action: {
-                                            //
+                                            self.searchText = ""
                                         }) {
                                             Image("cross")
                                                 .foregroundColor(AppColors.grey7)
@@ -75,7 +87,7 @@ struct SearchCountryView: View {
                                 HStack(alignment: .top) {
                                     VStack(alignment: .center) {
                                         Button(action: {
-                                            //
+                                            isShowingDifficultRouteViewModal.toggle()
                                         }) {
                                             Image("searchButton1")
                                                 .frame(width: 48)
@@ -86,10 +98,14 @@ struct SearchCountryView: View {
                                             .multilineTextAlignment(.center)
                                     }
                                     .frame(width: 70)
+                                    .sheet(isPresented: $isShowingDifficultRouteViewModal) {
+                                        DifficultRouteView()
+                                    }
                                     Spacer()
                                     VStack(alignment: .center) {
                                         Button(action: {
-                                            //
+                                            self.searchText = "Coчи"
+                                            self.isChooseFlightViewPresented.toggle()
                                         }) {
                                             Image("searchButton2")
                                                 .frame(width: 48)
@@ -103,7 +119,7 @@ struct SearchCountryView: View {
                                     Spacer()
                                     VStack(alignment: .center) {
                                         Button(action: {
-                                            //
+                                            isShowingWeekendsViewModal.toggle()
                                         }) {
                                             Image("searchButton3")
                                                 .frame(width: 48)
@@ -114,10 +130,13 @@ struct SearchCountryView: View {
                                             .multilineTextAlignment(.center)
                                     }
                                     .frame(width: 70)
+                                    .sheet(isPresented: $isShowingWeekendsViewModal) {
+                                        WeekendsView()
+                                    }
                                     Spacer()
                                     VStack(alignment: .center) {
                                         Button(action: {
-                                            //
+                                            isShowingHotTicketsViewModal.toggle()
                                         }) {
                                             Image("searchButton4")
                                                 .frame(width: 48)
@@ -128,6 +147,9 @@ struct SearchCountryView: View {
                                             .multilineTextAlignment(.center)
                                     }
                                     .frame(width: 70)
+                                    .sheet(isPresented: $isShowingHotTicketsViewModal) {
+                                        HotTicketsView()
+                                    }
                                 }
                                 .padding(.leading)
                                 .padding(.trailing)
@@ -140,6 +162,7 @@ struct SearchCountryView: View {
                                     VStack(alignment: .leading, spacing: 8) {
                                         CountrySelectionRow(image: "countryImage1", country: "Стамбул", isSelected: true) {
                                             selectedCountry = "Стамбул"
+                                            self.searchText = "Стамбул"
                                             isChooseFlightViewPresented.toggle()
                                         }
                                         .onTapGesture {
@@ -150,11 +173,12 @@ struct SearchCountryView: View {
                                             .background(AppColors.grey5)
                                             .padding(.bottom,8)
                                         CountrySelectionRow(image: "countryImage2", country: "Сочи", isSelected: true) {
-                                            selectedCountry = "Стамбул"
+                                            selectedCountry = "Сочи"
                                             isChooseFlightViewPresented.toggle()
                                         }
                                         .onTapGesture {
                                             selectedCountry = "Сочи"
+                                            self.searchText = "Сочи"
                                             isChooseFlightViewPresented.toggle()
                                         }
                                         Divider()
@@ -162,6 +186,7 @@ struct SearchCountryView: View {
                                             .padding(.bottom,8)
                                         CountrySelectionRow(image: "countryImage3", country: "Пхукет", isSelected: true) {
                                             selectedCountry = "Пхукет"
+                                            self.searchText = "Пхукет"
                                             isChooseFlightViewPresented.toggle()
                                         }
                                         .onTapGesture {
@@ -183,8 +208,7 @@ struct SearchCountryView: View {
             }
             .navigationBarHidden(true)
             .sheet(isPresented: $isChooseFlightViewPresented) {
-                ChoosenFlightView()
-//                ChoosenFlightView(selectedCountry: selectedCountry ?? "", dismiss: { isChooseFlightViewPresented = false })
+                ChoosenFlightView(cityDeparture: $cityDeparture, cityArrival: $cityArrival)
             }
         }
     }
@@ -213,10 +237,10 @@ struct CountrySelectionRow: View {
               }
     }
 }
-
-struct SearchCountryView_Previews: PreviewProvider {
-    static var previews: some View {
-        SearchCountryView()
-    }
-}
+//
+//struct SearchCountryView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SearchCountryView()
+//    }
+//}
 
