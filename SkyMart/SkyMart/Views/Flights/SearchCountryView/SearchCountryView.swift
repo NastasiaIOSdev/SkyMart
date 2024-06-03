@@ -12,12 +12,12 @@ struct SearchCountryView: View {
     @State private var isShowingDifficultRouteViewModal = false
     @State private var isShowingWeekendsViewModal = false
     @State private var isShowingHotTicketsViewModal = false
+    @State private var isChooseFlightViewPresented = false
+    @State private var searchText = ""
+    @State private var selectedCountry: String?
+    @State private var cityArrival: String = UserDefaults.standard.string(forKey: "lastCityArrival") ?? ""
     @Binding var cityDeparture: String
     @Environment(\.dismiss) var dismiss
-    @State private var searchText = "Куда - Турция"
-    @State private var selectedCountry: String?
-    @State private var isChooseFlightViewPresented = false
-    @State private var cityArrival: String = UserDefaults.standard.string(forKey: "lastCityArrival") ?? ""
     var body: some View {
         NavigationView {
             ZStack {
@@ -66,6 +66,15 @@ struct SearchCountryView: View {
                                         .textContentType(.name)
                                         .font(AppFonts.medium16.font)
                                         .foregroundColor(AppColors.white)
+                                        .onChange(of: cityArrival) { newValue in
+                                            UserDefaults.standard.set(newValue, forKey: "lastCityArrival")
+                                            if !newValue.isEmpty && !newValue.isCyrillic() {
+                                                cityArrival = ""
+                                            }
+                                        }
+                                        .disableAutocorrection(true)
+                                        .padding(.trailing)
+                                        .textFieldStyle(PlainTextFieldStyle())
                                         Spacer()
                                         Button(action: {
                                             self.searchText = ""
@@ -78,6 +87,9 @@ struct SearchCountryView: View {
                                     }
                                 }
                                 .padding()
+                                .sheet(isPresented: $isChooseFlightViewPresented) {
+                                    ChoosenFlightView(cityDeparture: $cityDeparture, cityArrival: $cityArrival)
+                                }
                         }
                     }
                     .padding()
@@ -104,7 +116,7 @@ struct SearchCountryView: View {
                                     Spacer()
                                     VStack(alignment: .center) {
                                         Button(action: {
-                                            self.searchText = "Coчи"
+                                            self.searchText = "Санкт-Петербург"
                                             self.isChooseFlightViewPresented.toggle()
                                         }) {
                                             Image("searchButton2")
@@ -169,16 +181,17 @@ struct SearchCountryView: View {
                                             selectedCountry = "Стамбул"
                                             isChooseFlightViewPresented.toggle()
                                         }
+                                        
                                         Divider()
                                             .background(AppColors.grey5)
                                             .padding(.bottom,8)
                                         CountrySelectionRow(image: "countryImage2", country: "Сочи", isSelected: true) {
                                             selectedCountry = "Сочи"
+                                            self.searchText = "Сочи"
                                             isChooseFlightViewPresented.toggle()
                                         }
                                         .onTapGesture {
                                             selectedCountry = "Сочи"
-                                            self.searchText = "Сочи"
                                             isChooseFlightViewPresented.toggle()
                                         }
                                         Divider()
@@ -207,36 +220,10 @@ struct SearchCountryView: View {
                 Spacer()
             }
             .navigationBarHidden(true)
-            .sheet(isPresented: $isChooseFlightViewPresented) {
-                ChoosenFlightView(cityDeparture: $cityDeparture, cityArrival: $cityArrival)
-            }
         }
     }
 }
 
-struct CountrySelectionRow: View {
-    var image: String
-    var country: String
-    var isSelected: Bool
-    var onTap: () -> Void
-    
-    var body: some View {
-        HStack {
-            Image(image).frame(width: 40)
-            VStack(alignment: .leading){
-                Text(country)
-                    .foregroundColor(AppColors.white)
-                    .font(AppFonts.semibold16.font)
-                Text("Популярные направления")
-                    .foregroundColor(AppColors.grey5)
-                    .font(AppFonts.regular14.font)
-            }
-        }
-        .onTapGesture {
-                  onTap()
-              }
-    }
-}
 //
 //struct SearchCountryView_Previews: PreviewProvider {
 //    static var previews: some View {

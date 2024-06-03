@@ -6,61 +6,6 @@
 //
 
 import SwiftUI
-import Foundation
-import Combine
-
-// MARK: - Welcome
-struct OffersResponse: Codable {
-    let offers: [Offer]
-}
-
-// MARK: - Offer
-struct Offer: Codable, Identifiable {
-    let id: Int
-    let name: String
-    let city: String
-    let price: Price
-    
-    enum CodingKeys: String, CodingKey {
-        case id, name = "title", city = "town", price
-    }
-}
-
-// MARK: - Price
-struct Price: Codable {
-    let value: Int
-}
-
-class NetworkManager {
-    static let shared = NetworkManager()
-    private init() {}
-    func fetchOffers() -> AnyPublisher<[Offer], Error> {
-        guard let url = URL(string: "https://run.mocky.io/v3/214a1713-bac0-4853-907c-a1dfc3cd05fd") else {
-            return Fail(error: NSError(domain: "Invalid URL", code: -1, userInfo: nil))
-                .eraseToAnyPublisher()
-        }
-        return URLSession.shared.dataTaskPublisher(for: url)
-            .map { $0.data}
-            .decode(type: OffersResponse.self, decoder: JSONDecoder())
-            .map { $0.offers}
-            .eraseToAnyPublisher()
-    }
-}
-
-class FlaightsViewModel: ObservableObject {
-    @Published var flightOffers: [Offer] = []
-    private var cancellables: Set<AnyCancellable> = []
-    
-    func fetchFlightsOffers() {
-        NetworkManager.shared.fetchOffers()
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { _ in },
-                  receiveValue: { [weak self] offers in
-                self?.flightOffers = offers
-            })
-            .store(in: &cancellables)
-    }
-}
 
 struct FlightsView: View {
     @State private var isShowingModal = false
@@ -156,37 +101,6 @@ struct FlightsView: View {
                 }
             }
         }
-    }
-}
-
-struct CollectionCellView: View {
-    let image: Image
-    let name: Text
-    let city: Text
-    let price: Text
-    var body: some View {
-        VStack(alignment: .leading, spacing: 4) {
-            image
-                .resizable()
-                .frame(width: 132, height: 132)
-                .cornerRadius(16)
-            name
-                .font(AppFonts.semibold16.font)
-                .foregroundColor(AppColors.white)
-            city
-                .font(AppFonts.regular14.font)
-                .foregroundColor(AppColors.white)
-            HStack(spacing: 4){
-                Image("airplane")
-                    .frame(width: 16)
-                Text("от")
-                price
-                Text("₽")
-            }
-            .font(AppFonts.regular14.font)
-            .foregroundColor(AppColors.white)
-        }
-        .frame(width: 132, height: 213)
     }
 }
 
