@@ -12,6 +12,7 @@ struct CollectionCellView: View {
     let name: Text
     let city: Text
     let price: Text
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
             image

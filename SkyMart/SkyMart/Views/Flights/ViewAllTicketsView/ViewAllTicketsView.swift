@@ -8,51 +8,19 @@
 import SwiftUI
 
 struct ViewAllTicketsView: View {
-    @Environment(\.dismiss) var dismiss
+    
     @StateObject var viewModel = AllTicketsViewModel()
     @State private var isTicketScreenViewPresented = false
+    @ObservedObject var coordinator = AppCoordinator()
+    @Environment(\.dismiss) var dismiss
     var body: some View {
         NavigationView {
             ZStack {
                 Color(.black)
                     .ignoresSafeArea()
                 VStack(spacing: 16) {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 0)
-                            .foregroundColor(AppColors.grey2)
-                            .frame(height: 56)
-                        HStack {
-                            Button(action: {
-                                dismiss()
-                            }) {
-                                Image("arrowLeft")
-                                    .foregroundColor(AppColors.blue)
-                                    .padding(.leading)
-                            }
-                            VStack(alignment: .leading, spacing: 4) {
-                                HStack{
-                                    HStack(spacing: 0) {
-                                        Text("Москва")
-                                        Text("-")
-                                        Text("Сочи")
-                                    }
-                                    .font(AppFonts.semibold16.font)
-                                    .foregroundColor(AppColors.white)
-                                    Spacer()
-                                }
-                                HStack{
-                                    HStack(spacing: 0) {
-                                        Text("23 февраля")
-                                        Text(", 1 пассажир")
-                                    }
-                                    .font(AppFonts.semibold14.font)
-                                    .foregroundColor(AppColors.grey6)
-                                    Spacer()
-                                }
-                            }
-                        }
-                    }
-                    .padding([.leading, .trailing])
+                    CityHeaderView(dismiss: dismiss)
+                                        .padding([.leading, .trailing])
                     ScrollView(.vertical, showsIndicators: false) {
                         VStack(spacing: 4) {
                             ForEach(viewModel.allTicketsOffers) { ticket in
@@ -67,7 +35,7 @@ struct ViewAllTicketsView: View {
                                         depatureAirport: Text(ticket.departure.airport.rawValue),
                                         arivalTime: Text(DateFormatter.formatTime(from: ticket.arrival.date, format: "HH:mm")),
                                         arivalAirport: Text(ticket.arrival.airport.rawValue),
-                                        travelTime: Text(DateFormatter.calculateTimeTraveling(depatureDate: ticket.departure.date, arrivalDate: ticket.arrival.date)),
+                                        travelTime: Text(TimeTravelService.calculateTimeTraveling(depatureDate: ticket.departure.date, arrivalDate: ticket.arrival.date)),
                                         hasTransfer: Text(ticket.hasTransfer ? "" : " / Без пересадок"),
                                         badgeColor: ticket.badge != nil ? .blue : nil
                                     )
@@ -83,32 +51,7 @@ struct ViewAllTicketsView: View {
                         viewModel.fetchAllFlaightsOffers()
                     }
                     Spacer()
-                    
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 50)
-                            .foregroundColor(AppColors.blue)
-                            .frame(width: 212, height: 37)
-                        HStack (spacing: 15){
-                            Button(action: {
-                                //
-                            }) {
-                                HStack(spacing: 2){
-                                    Image("filter2")
-                                    Text("Фильтры")
-                                }
-                            }
-                            Button(action: {
-                                //
-                            }) {
-                                HStack(spacing: 2) {
-                                    Image("charts")
-                                    Text("График цен")
-                                }
-                            }
-                        }
-                        .foregroundColor(AppColors.white)
-                        .font(AppFonts.regular14.font)
-                    }
+                    FilterView()
                 }
             }
             .navigationBarHidden(true)

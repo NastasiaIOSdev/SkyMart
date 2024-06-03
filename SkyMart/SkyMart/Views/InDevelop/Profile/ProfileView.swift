@@ -1,5 +1,5 @@
 //
-//  InShortView.swift
+//  ProfileView.swift
 //  SkyMart
 //
 //  Created by Анастасия Ларина on 30.05.2024.
@@ -7,22 +7,16 @@
 
 import SwiftUI
 
-struct InShortView: View {
+struct ProfileView: View {
     var body: some View {
         ZStack {
             Color.black
                 .ignoresSafeArea()
             VStack {
-                Text("InShort")
+                Text("Profile")
                     .font(AppFonts.semibold22.font)
                     .foregroundColor(AppColors.white)
             }
         }
-    }
-}
-
-struct InShortView_Previews: PreviewProvider {
-    static var previews: some View {
-        InShortView()
     }
 }

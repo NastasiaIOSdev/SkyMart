@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct TicketScreenView: View {
+    @ObservedObject var coordinator = AppCoordinator()
     var body: some View {
         ZStack {
             Color(.black)

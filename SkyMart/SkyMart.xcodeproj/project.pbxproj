@@ -21,9 +21,20 @@
 		2E0533D82C0DA7DF0098A919 /* FlightDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0533D72C0DA7DF0098A919 /* FlightDetailsView.swift */; };
 		2E0533DA2C0DA8560098A919 /* PriceInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0533D92C0DA8560098A919 /* PriceInfoView.swift */; };
 		2E0533DC2C0DA95B0098A919 /* DatePickerModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0533DB2C0DA95B0098A919 /* DatePickerModalView.swift */; };
+		2E0533E12C0DAF1B0098A919 /* FlightTipsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0533E02C0DAF1B0098A919 /* FlightTipsView.swift */; };
+		2E0533E32C0DAFE90098A919 /* SearchFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0533E22C0DAFE90098A919 /* SearchFieldView.swift */; };
+		2E0533E62C0E0B530098A919 /* SearchCountryTextFieldsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0533E52C0E0B530098A919 /* SearchCountryTextFieldsView.swift */; };
+		2E0533E82C0E0DEB0098A919 /* CitySearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0533E72C0E0DEA0098A919 /* CitySearchView.swift */; };
+		2E0533EA2C0E126F0098A919 /* GorizontalScrollDateInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0533E92C0E126F0098A919 /* GorizontalScrollDateInformationView.swift */; };
+		2E0533EC2C0E14E00098A919 /* TicketRecommendationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0533EB2C0E14E00098A919 /* TicketRecommendationsView.swift */; };
+		2E0533EE2C0E16300098A919 /* ViewAllTicketsButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0533ED2C0E16300098A919 /* ViewAllTicketsButtonView.swift */; };
+		2E0533F02C0E173D0098A919 /* SubscriptionToThePriceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0533EF2C0E173D0098A919 /* SubscriptionToThePriceView.swift */; };
+		2E0533F22C0E17EB0098A919 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0533F12C0E17EB0098A919 /* FilterView.swift */; };
+		2E0533F42C0E18420098A919 /* CityHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0533F32C0E18420098A919 /* CityHeaderView.swift */; };
+		2E0533F62C0E1D470098A919 /* TimeTravelService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0533F52C0E1D470098A919 /* TimeTravelService.swift */; };
 		2E7E0E4F2C08899600E126DC /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7E0E4E2C08899600E126DC /* AppCoordinator.swift */; };
 		2E7E0E512C0889D400E126DC /* FlightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7E0E502C0889D400E126DC /* FlightView.swift */; };
-		2E7E0E532C0889FD00E126DC /* SearchCountryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7E0E522C0889FD00E126DC /* SearchCountryView.swift */; };
+		2E7E0E532C0889FD00E126DC /* SearchCityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7E0E522C0889FD00E126DC /* SearchCityView.swift */; };
 		2E7E0E572C088A4E00E126DC /* HotelsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7E0E562C088A4E00E126DC /* HotelsView.swift */; };
 		2E7E0E592C088A7600E126DC /* InShortView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7E0E582C088A7600E126DC /* InShortView.swift */; };
 		2E7E0E5B2C088A9700E126DC /* SubscriptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7E0E5A2C088A9700E126DC /* SubscriptionsView.swift */; };
@@ -68,9 +79,20 @@
 		2E0533D72C0DA7DF0098A919 /* FlightDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightDetailsView.swift; sourceTree = "<group>"; };
 		2E0533D92C0DA8560098A919 /* PriceInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceInfoView.swift; sourceTree = "<group>"; };
 		2E0533DB2C0DA95B0098A919 /* DatePickerModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerModalView.swift; sourceTree = "<group>"; };
+		2E0533E02C0DAF1B0098A919 /* FlightTipsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightTipsView.swift; sourceTree = "<group>"; };
+		2E0533E22C0DAFE90098A919 /* SearchFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFieldView.swift; sourceTree = "<group>"; };
+		2E0533E52C0E0B530098A919 /* SearchCountryTextFieldsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCountryTextFieldsView.swift; sourceTree = "<group>"; };
+		2E0533E72C0E0DEA0098A919 /* CitySearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitySearchView.swift; sourceTree = "<group>"; };
+		2E0533E92C0E126F0098A919 /* GorizontalScrollDateInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GorizontalScrollDateInformationView.swift; sourceTree = "<group>"; };
+		2E0533EB2C0E14E00098A919 /* TicketRecommendationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketRecommendationsView.swift; sourceTree = "<group>"; };
+		2E0533ED2C0E16300098A919 /* ViewAllTicketsButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAllTicketsButtonView.swift; sourceTree = "<group>"; };
+		2E0533EF2C0E173D0098A919 /* SubscriptionToThePriceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionToThePriceView.swift; sourceTree = "<group>"; };
+		2E0533F12C0E17EB0098A919 /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
+		2E0533F32C0E18420098A919 /* CityHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityHeaderView.swift; sourceTree = "<group>"; };
+		2E0533F52C0E1D470098A919 /* TimeTravelService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTravelService.swift; sourceTree = "<group>"; };
 		2E7E0E4E2C08899600E126DC /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		2E7E0E502C0889D400E126DC /* FlightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightView.swift; sourceTree = "<group>"; };
-		2E7E0E522C0889FD00E126DC /* SearchCountryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCountryView.swift; sourceTree = "<group>"; };
+		2E7E0E522C0889FD00E126DC /* SearchCityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCityView.swift; sourceTree = "<group>"; };
 		2E7E0E562C088A4E00E126DC /* HotelsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotelsView.swift; sourceTree = "<group>"; };
 		2E7E0E582C088A7600E126DC /* InShortView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InShortView.swift; sourceTree = "<group>"; };
 		2E7E0E5A2C088A9700E126DC /* SubscriptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionsView.swift; sourceTree = "<group>"; };
@@ -125,7 +147,7 @@
 		2E0533BA2C0D926E0098A919 /* SearchCountryView */ = {
 			isa = PBXGroup;
 			children = (
-				2E7E0E522C0889FD00E126DC /* SearchCountryView.swift */,
+				2E7E0E522C0889FD00E126DC /* SearchCityView.swift */,
 				2E0533C02C0D935E0098A919 /* Components */,
 			);
 			path = SearchCountryView;
@@ -152,6 +174,7 @@
 		2E0533BF2C0D93310098A919 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				2E0533E52C0E0B530098A919 /* SearchCountryTextFieldsView.swift */,
 				2E0533C92C0DA4630098A919 /* CollectionCellView.swift */,
 			);
 			path = Components;
@@ -161,9 +184,9 @@
 			isa = PBXGroup;
 			children = (
 				2E0533CB2C0DA4BE0098A919 /* CountrySelectionRow.swift */,
-				2ECD67582C0C688700A10035 /* DifficultRouteView.swift */,
-				2ECD675C2C0C68ED00A10035 /* WeekendsView.swift */,
-				2ECD675E2C0C692400A10035 /* HotTicketsView.swift */,
+				2E0533E22C0DAFE90098A919 /* SearchFieldView.swift */,
+				2E0533E02C0DAF1B0098A919 /* FlightTipsView.swift */,
+				2E0533E42C0DB1560098A919 /* ScreenPlug */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -174,6 +197,11 @@
 				2E0533CD2C0DA52E0098A919 /* FilterCellView.swift */,
 				2E0533CF2C0DA5520098A919 /* DirectFlightsCellView.swift */,
 				2E0533DB2C0DA95B0098A919 /* DatePickerModalView.swift */,
+				2E0533E72C0E0DEA0098A919 /* CitySearchView.swift */,
+				2E0533E92C0E126F0098A919 /* GorizontalScrollDateInformationView.swift */,
+				2E0533EB2C0E14E00098A919 /* TicketRecommendationsView.swift */,
+				2E0533ED2C0E16300098A919 /* ViewAllTicketsButtonView.swift */,
+				2E0533EF2C0E173D0098A919 /* SubscriptionToThePriceView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -181,7 +209,9 @@
 		2E0533C42C0D94300098A919 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				2E0533F32C0E18420098A919 /* CityHeaderView.swift */,
 				2E0533D12C0DA58B0098A919 /* AllTicketsRowView.swift */,
+				2E0533F12C0E17EB0098A919 /* FilterView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -205,6 +235,27 @@
 				2E0533C52C0D944D0098A919 /* AllTicketsViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		2E0533DD2C0DACA50098A919 /* InDevelop */ = {
+			isa = PBXGroup;
+			children = (
+				2EA298F82C08869C0069F35A /* Hotets */,
+				2EA298F72C0886970069F35A /* InShort */,
+				2EA299002C08876E0069F35A /* Subscriptions */,
+				2EA299012C0887720069F35A /* Profile */,
+			);
+			path = InDevelop;
+			sourceTree = "<group>";
+		};
+		2E0533E42C0DB1560098A919 /* ScreenPlug */ = {
+			isa = PBXGroup;
+			children = (
+				2ECD67582C0C688700A10035 /* DifficultRouteView.swift */,
+				2ECD675C2C0C68ED00A10035 /* WeekendsView.swift */,
+				2ECD675E2C0C692400A10035 /* HotTicketsView.swift */,
+			);
+			path = ScreenPlug;
 			sourceTree = "<group>";
 		};
 		2EA298DD2C0884BE0069F35A = {
@@ -301,10 +352,7 @@
 			isa = PBXGroup;
 			children = (
 				2EA298F92C08869F0069F35A /* Flights */,
-				2EA298F82C08869C0069F35A /* Hotets */,
-				2EA298F72C0886970069F35A /* InShort */,
-				2EA299002C08876E0069F35A /* Subscriptions */,
-				2EA299012C0887720069F35A /* Profile */,
+				2E0533DD2C0DACA50098A919 /* InDevelop */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -313,6 +361,7 @@
 			isa = PBXGroup;
 			children = (
 				2E0533B72C0D03440098A919 /* NetWorkManager.swift */,
+				2E0533F52C0E1D470098A919 /* TimeTravelService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -458,6 +507,8 @@
 			files = (
 				2E0533C32C0D939B0098A919 /* TicketsViewModel.swift in Sources */,
 				2E7E0E592C088A7600E126DC /* InShortView.swift in Sources */,
+				2E0533EE2C0E16300098A919 /* ViewAllTicketsButtonView.swift in Sources */,
+				2E0533E62C0E0B530098A919 /* SearchCountryTextFieldsView.swift in Sources */,
 				2EFC55002C08A0BC00BEBF1D /* Constants.swift in Sources */,
 				2E7E0E5B2C088A9700E126DC /* SubscriptionsView.swift in Sources */,
 				2E0533CC2C0DA4BE0098A919 /* CountrySelectionRow.swift in Sources */,
@@ -466,27 +517,36 @@
 				2E0533D42C0DA68A0098A919 /* BackButtonsView.swift in Sources */,
 				2ECD67562C0B922500A10035 /* CyrillicString.swift in Sources */,
 				2EA299052C0888130069F35A /* AppFonts.swift in Sources */,
+				2E0533F42C0E18420098A919 /* CityHeaderView.swift in Sources */,
+				2E0533F02C0E173D0098A919 /* SubscriptionToThePriceView.swift in Sources */,
 				2E0533B82C0D03440098A919 /* NetWorkManager.swift in Sources */,
-				2E7E0E532C0889FD00E126DC /* SearchCountryView.swift in Sources */,
+				2E7E0E532C0889FD00E126DC /* SearchCityView.swift in Sources */,
 				2E7E0E5D2C088AB700E126DC /* ProfileView.swift in Sources */,
 				2EFC54FA2C089F4500BEBF1D /* AllTickets.swift in Sources */,
+				2E0533E82C0E0DEB0098A919 /* CitySearchView.swift in Sources */,
 				2EFC55042C08A23D00BEBF1D /* TicketScreenView.swift in Sources */,
 				2ECD675D2C0C68ED00A10035 /* WeekendsView.swift in Sources */,
 				2EA2990E2C08888D0069F35A /* AppColors.swift in Sources */,
 				2E0533D62C0DA74A0098A919 /* AboutTariffView.swift in Sources */,
 				2E7E0E4F2C08899600E126DC /* AppCoordinator.swift in Sources */,
+				2E0533EA2C0E126F0098A919 /* GorizontalScrollDateInformationView.swift in Sources */,
+				2E0533E32C0DAFE90098A919 /* SearchFieldView.swift in Sources */,
 				2EA298EC2C0884BF0069F35A /* ContentView.swift in Sources */,
 				2ECD67592C0C688700A10035 /* DifficultRouteView.swift in Sources */,
+				2E0533EC2C0E14E00098A919 /* TicketRecommendationsView.swift in Sources */,
 				2E7E0E512C0889D400E126DC /* FlightView.swift in Sources */,
 				2EFC54FC2C089F9F00BEBF1D /* TicketsOffers.swift in Sources */,
 				2E0533DA2C0DA8560098A919 /* PriceInfoView.swift in Sources */,
 				2E0533BE2C0D92EB0098A919 /* FlaightsViewModel.swift in Sources */,
+				2E0533F62C0E1D470098A919 /* TimeTravelService.swift in Sources */,
 				2E0533CE2C0DA52E0098A919 /* FilterCellView.swift in Sources */,
 				2E0533D82C0DA7DF0098A919 /* FlightDetailsView.swift in Sources */,
+				2E0533F22C0E17EB0098A919 /* FilterView.swift in Sources */,
 				2E0533CA2C0DA4630098A919 /* CollectionCellView.swift in Sources */,
 				2E0533DC2C0DA95B0098A919 /* DatePickerModalView.swift in Sources */,
 				2ECD67542C0AD8A600A10035 /* DateFormatter.swift in Sources */,
 				2ECD67522C0A591D00A10035 /* PriceFormatter.swift in Sources */,
+				2E0533E12C0DAF1B0098A919 /* FlightTipsView.swift in Sources */,
 				2E0533D22C0DA58B0098A919 /* AllTicketsRowView.swift in Sources */,
 				2EFC54FE2C089FEC00BEBF1D /* Offer.swift in Sources */,
 				2EA298EA2C0884BF0069F35A /* SkyMartApp.swift in Sources */,

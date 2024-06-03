@@ -11,6 +11,8 @@ struct FlightsView: View {
     @State private var isShowingModal = false
     @State private var cityDeparture: String = UserDefaults.standard.string(forKey: "lastCityDeparture") ?? ""
     @StateObject var viewModel = FlaightsViewModel()
+    @ObservedObject var coordinator = AppCoordinator()
+    
     var body: some View {
         NavigationStack{
             ZStack {
@@ -23,57 +25,9 @@ struct FlightsView: View {
                                 .font(AppFonts.semibold22.font)
                                 .foregroundColor(AppColors.white)
                             VStack(alignment: .leading, spacing: 32) {
-                                ZStack{
-                                    RoundedRectangle(cornerRadius: 16)
-                                        .foregroundColor(AppColors.grey3)
-                                        .frame(height: 122)
-                                    RoundedRectangle(cornerRadius: 16)
-                                        .foregroundColor(AppColors.grey4)
-                                        .frame(height: 95)
-                                        .padding()
-                                        .shadow(color: Color.black.opacity(0.25), radius: 4, x: 0, y: 4)
-                                    HStack {
-                                        Image("loop")
-                                            .foregroundColor(AppColors.grey6)
-                                            .padding(.leading)
-                                        VStack(alignment: .leading) {
-                                            
-                                            TextField(
-                                                "",
-                                                text: $cityDeparture,
-                                                prompt: Text("Откуда - Москва")
-                                                .font(AppFonts.medium16.font)
-                                                .foregroundColor(AppColors.white)
-                                            )
-                                            .textContentType(.name)
-                                            .font(AppFonts.medium16.font)
-                                            .foregroundColor(AppColors.white)
-                                            .onChange(of: cityDeparture) { newValue in
-                                                UserDefaults.standard.set(newValue, forKey: "lastCityDeparture")
-                                                if !newValue.isEmpty && !newValue.isCyrillic() {
-                                                    cityDeparture = ""
-                                                }
-                                            }
-                                            .disableAutocorrection(true)
-                                            .padding(.trailing)
-                                            .textFieldStyle(PlainTextFieldStyle())
-                                            Divider()
-                                                .background(AppColors.grey6)
-                                            Button(action: {
-                                                isShowingModal.toggle()
-                                            }) {
-                                                Text("Куда - Турция")
-                                                    .font(AppFonts.medium16.font)
-                                                    .foregroundColor(AppColors.grey6)
-                                            }
-                                        }
-                                        .padding()
-                                        .sheet(isPresented: $isShowingModal) {
-                                            SearchCountryView(cityDeparture: $cityDeparture)
-                                        }
-                                    }
-                                    .padding()
-                                }
+                                SearchCountryTextFieldsView(
+                                    isShowingModal: $isShowingModal,
+                                    cityDeparture: $cityDeparture)
                                 Text("Музыкально отлететь")
                                     .font(AppFonts.semibold22.font)
                                     .foregroundColor(AppColors.white)
@@ -101,11 +55,5 @@ struct FlightsView: View {
                 }
             }
         }
-    }
-}
-
-struct FlightsView_Previews: PreviewProvider {
-    static var previews: some View {
-        FlightsView()
     }
 }

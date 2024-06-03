@@ -26,7 +26,7 @@ struct CountrySelectionRow: View {
             }
         }
         .onTapGesture {
-                  onTap()
-              }
+            onTap()
+        }
     }
 }

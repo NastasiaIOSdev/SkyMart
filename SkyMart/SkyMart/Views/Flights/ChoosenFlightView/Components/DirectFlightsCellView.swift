@@ -10,6 +10,7 @@ struct DirectFlightsCellView: View {
     let title: Text
     let time: Text
     let price: Text
+    let color: Color
     var body: some View {
         Button(action: {
             //
@@ -18,7 +19,7 @@ struct DirectFlightsCellView: View {
                 HStack(alignment: .top) {
                     Circle()
                         .frame(width: 24, height: 24)
-                        .foregroundColor(AppColors.white)
+                        .foregroundColor(color)
                     VStack(alignment: .leading) {
                         HStack{
                             title
