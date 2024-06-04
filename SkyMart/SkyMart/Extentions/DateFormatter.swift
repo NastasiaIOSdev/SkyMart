@@ -31,6 +31,12 @@ extension DateFormatter {
         return dateFormatter.string(from: Date())
     }
     
+    static func currentDateDayFormatter() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd MMM"
+        return dateFormatter.string(from: Date())
+    }
+    
     static func formatDate(_ date: Date) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd MMM, E"

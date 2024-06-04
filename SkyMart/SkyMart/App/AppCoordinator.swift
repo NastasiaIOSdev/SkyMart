@@ -13,4 +13,7 @@ class AppCoordinator: ObservableObject {
         case flights, hotels, locations, subscriptions, account
     }
     @Published var selectedTab: Tab = .flights
+    @Published var cityDeparture: String = UserDefaults.standard.string(forKey: "lastCityDeparture") ?? ""
+    @Published var cityArrival: String = UserDefaults.standard.string(forKey: "lastCityArrival") ?? ""
+    @Published var isShowingChoosenFlightView = false
 }

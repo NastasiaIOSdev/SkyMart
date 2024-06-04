@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct FlightDetailsView: View {
+    @Binding var cityDeparture: String
+    @Binding var cityArrival: String
     var body: some View {
         ZStack{
             RoundedRectangle(cornerRadius: 8)
@@ -19,7 +21,7 @@ struct FlightDetailsView: View {
                         .frame(width: 32)
                         .foregroundColor(.white)
                     VStack(alignment: .leading) {
-                        Text("Якутия")
+                        Text(cityDeparture)
                             .foregroundColor(AppColors.white)
                             .font(AppFonts.regularItalic14.font)
                         Text("04ч  в полете")
@@ -54,7 +56,7 @@ struct FlightDetailsView: View {
                             }
                             .padding(.trailing, 16)
                             VStack(alignment: .leading) {
-                                Text("Москва")
+                                Text(cityDeparture)
                                     .foregroundColor(AppColors.white)
                                 Text("Внуково, VKO")
                                     .foregroundColor(AppColors.grey6)
@@ -70,7 +72,7 @@ struct FlightDetailsView: View {
                             }
                             .padding(.trailing, 16)
                             VStack(alignment: .leading) {
-                                Text("Сочи")
+                                Text(cityArrival)
                                     .foregroundColor(AppColors.white)
                                 Text("Адлер, AER")
                                     .foregroundColor(AppColors.grey6)
@@ -85,11 +87,5 @@ struct FlightDetailsView: View {
             }
             .padding()
         }
-    }
-}
-
-struct FlightDetailsView_Previews: PreviewProvider {
-    static var previews: some View {
-        FlightDetailsView()
     }
 }

@@ -35,10 +35,10 @@ struct SearchCityView: View {
                     }
                     VStack(alignment: .leading) {
                         SearchFieldView(
-                            searchText: $searchText,
+                            isClosedModal: $isClosedModal, searchText: $searchText,
                             cityArrival: $cityArrival,
                             isChooseFlightViewPresented: $isChooseFlightViewPresented,
-                            cityDeparture: $cityDeparture)
+                            cityDeparture: $cityDeparture, coordinator: coordinator)
                     }
                     .padding()
                     ScrollView (.vertical, showsIndicators: false) {

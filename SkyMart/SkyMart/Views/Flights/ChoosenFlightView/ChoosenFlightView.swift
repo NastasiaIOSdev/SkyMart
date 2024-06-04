@@ -56,7 +56,7 @@ struct ChoosenFlightView: View {
             }
             .navigationBarHidden(true)
             .sheet(isPresented: $isViewAllTicketsViewPresented) {
-                ViewAllTicketsView()
+                ViewAllTicketsView(cityDeparture: $cityDeparture, cityArrival: $cityArrival)
             }
         }
     }

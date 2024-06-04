@@ -10,6 +10,7 @@ import SwiftUI
 struct SearchCountryTextFieldsView: View {
     @Binding var isShowingModal: Bool
     @Binding var cityDeparture: String
+    @ObservedObject var coordinator: AppCoordinator
     
     var body: some View {
         ZStack{
@@ -58,7 +59,7 @@ struct SearchCountryTextFieldsView: View {
                 }
                 .padding()
                 .sheet(isPresented: $isShowingModal) {
-                    SearchCityView(cityDeparture: $cityDeparture)
+                    SearchCityView(cityDeparture: $cityDeparture, coordinator: coordinator)
                 }
             }
             .padding()

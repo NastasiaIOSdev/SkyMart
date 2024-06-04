@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ViewAllTicketsView: View {
     
+    @Binding var cityDeparture: String
+    @Binding var cityArrival: String
     @StateObject var viewModel = AllTicketsViewModel()
     @State private var isTicketScreenViewPresented = false
     @ObservedObject var coordinator = AppCoordinator()
@@ -19,7 +21,7 @@ struct ViewAllTicketsView: View {
                 Color(.black)
                     .ignoresSafeArea()
                 VStack(spacing: 16) {
-                    CityHeaderView(dismiss: dismiss)
+                    CityHeaderView(cityDeparture: $cityDeparture, cityArrival: $cityArrival, dismiss: dismiss)
                                         .padding([.leading, .trailing])
                     ScrollView(.vertical, showsIndicators: false) {
                         VStack(spacing: 4) {
@@ -56,15 +58,11 @@ struct ViewAllTicketsView: View {
             }
             .navigationBarHidden(true)
             .sheet(isPresented: $isTicketScreenViewPresented) {
-                TicketScreenView()
+                TicketScreenView(
+                    cityDeparture: $cityDeparture,
+                    cityArrival: $cityArrival)
             }
         }
-    }
-}
-
-struct ViewAllTicketsView_Previews: PreviewProvider {
-    static var previews: some View {
-        ViewAllTicketsView()
     }
 }
 

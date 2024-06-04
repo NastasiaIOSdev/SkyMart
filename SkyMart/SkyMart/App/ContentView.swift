@@ -12,7 +12,7 @@ struct ContentView: View {
     
     var body: some View {
         TabView(selection: $coordinator.selectedTab) {
-            FlightsView()
+            FlightsView(coordinator: coordinator)
                 .tabItem {
                     Image("airplane")
                     Text("Авиабилеты")
@@ -44,11 +44,8 @@ struct ContentView: View {
                 .tag(AppCoordinator.Tab.account)
         }
         .accentColor(AppColors.blue)
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
+        .sheet(isPresented: $coordinator.isShowingChoosenFlightView) {
+            ChoosenFlightView(cityDeparture: $coordinator.cityDeparture, cityArrival: $coordinator.cityArrival)
+        }
     }
 }

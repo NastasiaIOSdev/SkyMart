@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct CityHeaderView: View {
+    @Binding var cityDeparture: String
+    @Binding var cityArrival: String
     var dismiss: DismissAction?
     var body: some View {
         ZStack {
@@ -25,9 +27,9 @@ struct CityHeaderView: View {
                 VStack(alignment: .leading, spacing: 4) {
                     HStack{
                         HStack(spacing: 0) {
-                            Text("Москва")
+                            Text(cityDeparture)
                             Text("-")
-                            Text("Сочи")
+                            Text(cityArrival)
                         }
                         .font(AppFonts.semibold16.font)
                         .foregroundColor(AppColors.white)
@@ -35,7 +37,7 @@ struct CityHeaderView: View {
                     }
                     HStack{
                         HStack(spacing: 0) {
-                            Text("23 февраля")
+                            Text(DateFormatter.currentDateDayFormatter())
                             Text(", 1 пассажир")
                         }
                         .font(AppFonts.semibold14.font)
@@ -45,11 +47,5 @@ struct CityHeaderView: View {
                 }
             }
         }
-    }
-}
-
-struct CityHeaderView_Previews: PreviewProvider {
-    static var previews: some View {
-        CityHeaderView()
     }
 }

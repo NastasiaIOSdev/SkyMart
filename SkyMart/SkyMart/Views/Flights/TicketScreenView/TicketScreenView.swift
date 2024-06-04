@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct TicketScreenView: View {
+    @Binding var cityDeparture: String
+    @Binding var cityArrival: String
     @ObservedObject var coordinator = AppCoordinator()
     var body: some View {
         ZStack {
@@ -20,7 +22,11 @@ struct TicketScreenView: View {
                     VStack(alignment: .leading, spacing: 16) {
                         AboutTariffView()
                         VStack(alignment: .leading) {
-                            Text("Москва-Сочи")
+                            HStack(spacing: 0){
+                                Text(cityDeparture)
+                                Text("-")
+                                Text(cityArrival)
+                            }
                                 .font(AppFonts.semibold16.font)
                                 .foregroundColor(AppColors.white)
                             Text("04ч в пути")
@@ -28,7 +34,9 @@ struct TicketScreenView: View {
                                 .font(AppFonts.regularItalic14.font)
                         }
                         .frame(height: 40)
-                        FlightDetailsView()
+                        FlightDetailsView(
+                            cityDeparture: $cityDeparture,
+                            cityArrival: $cityArrival)
                     }
                     .padding()
                     PriceInfoView()
@@ -36,11 +44,5 @@ struct TicketScreenView: View {
                 Spacer()
             }
         }
-    }
-}
-
-struct TicketScreenView_Previews: PreviewProvider {
-    static var previews: some View {
-        TicketScreenView()
     }
 }

@@ -13,7 +13,7 @@ struct FlightTipsView: View {
     @Binding var isShowingHotTicketsViewModal: Bool
     @Binding var isChooseFlightViewPresented: Bool
     @Binding var searchText: String
-    
+    @Environment(\.dismiss) var dismiss
     var body: some View {
         HStack(alignment: .top) {
             VStack(alignment: .center) {
@@ -35,7 +35,7 @@ struct FlightTipsView: View {
             Spacer()
             VStack(alignment: .center) {
                 Button(action: {
-                    self.searchText = "Санкт-Петербург"
+                    self.searchText = "Куда угодно"
                     self.isChooseFlightViewPresented.toggle()
                 }) {
                     Image("searchButton2")

@@ -8,10 +8,13 @@
 import SwiftUI
 
 struct SearchFieldView: View {
+    @Binding var isClosedModal: Bool
     @Binding var searchText: String
     @Binding var cityArrival: String
     @Binding var isChooseFlightViewPresented: Bool
     @Binding var cityDeparture: String
+    @ObservedObject var coordinator: AppCoordinator
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         ZStack{
@@ -48,10 +51,13 @@ struct SearchFieldView: View {
                     .textContentType(.name)
                     .font(AppFonts.medium16.font)
                     .foregroundColor(AppColors.white)
-                    .onChange(of: cityArrival) { newValue in
+                    .onChange(of: searchText) { newValue in
                         UserDefaults.standard.set(newValue, forKey: "lastCityArrival")
                         if !newValue.isEmpty && !newValue.isCyrillic() {
-                            cityArrival = ""
+                            //cityArrival = ""
+                            coordinator.selectedTab = .flights
+                            presentationMode.wrappedValue.dismiss()
+                            coordinator.isShowingChoosenFlightView = true
                         }
                     }
                     .disableAutocorrection(true)
@@ -70,7 +76,7 @@ struct SearchFieldView: View {
             }
             .padding()
             .sheet(isPresented: $isChooseFlightViewPresented) {
-                ChoosenFlightView(cityDeparture: $cityDeparture, cityArrival: $cityArrival)
+                ChoosenFlightView(cityDeparture: $cityDeparture, cityArrival: $searchText)
             }
         }
     }

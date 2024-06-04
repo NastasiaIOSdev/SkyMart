@@ -27,7 +27,7 @@ struct FlightsView: View {
                             VStack(alignment: .leading, spacing: 32) {
                                 SearchCountryTextFieldsView(
                                     isShowingModal: $isShowingModal,
-                                    cityDeparture: $cityDeparture)
+                                    cityDeparture: $cityDeparture, coordinator: coordinator)
                                 Text("Музыкально отлететь")
                                     .font(AppFonts.semibold22.font)
                                     .foregroundColor(AppColors.white)
